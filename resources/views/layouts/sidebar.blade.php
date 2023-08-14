@@ -57,6 +57,32 @@
                     </a>
                 </li>
 
+                <li class="sidebar-title">Izin</li>
+                <li class="sidebar-item {{ Request::is('cuti/pengajuan-cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.pengajuan-cuti.index') }}" class='sidebar-link'>
+                        <i class="bi bi-clock"></i>
+                        <span>Pengajuan Izin</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('cuti/persetujuan-cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.persetujuan-cuti.index') }}" class='sidebar-link'>
+                        <i class="bi-clipboard-check"></i>
+                        <span>Persetujuan Izin</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.index') }}" class='sidebar-link'>
+                        <i class="bi bi-list-ul"></i>
+                        <span>Daftar Izin</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('izin/jenis-izin') ? 'active' : '' }}">
+                    <a href="{{ route('izin.jenis-izin.index') }}" class='sidebar-link'>
+                        <i class="bi bi-gear"></i>
+                        <span>Jenis Izin</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-title">Cuti</li>
                 <li class="sidebar-item {{ Request::is('cuti/pengajuan-cuti') ? 'active' : '' }}">
                     <a href="{{ route('cuti.pengajuan-cuti.index') }}" class='sidebar-link'>

@@ -13,13 +13,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Jenis Cuti</h3>
+                    <h3>Jenis Izin</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Jenis Cuti</li>
+                            <li class="breadcrumb-item active" aria-current="page">Jenis Izin</li>
                         </ol>
                     </nav>
                 </div>
@@ -39,8 +39,7 @@
                     <table class="table" id="dataTable">
                         <thead>
                             <tr>
-                                <th width="40%">Nama</th>
-                                <th width="20%">Kuota</th>
+                                <th width="60%">Nama</th>
                                 <th width="20%">Status Aktif</th>
                                 <th width="20%">Aksi</th>
                             </tr>
@@ -73,12 +72,6 @@
                                 <div class="form-group">
                                     <label for="input-nama">Nama</label>
                                     <input id="input-nama" type="text" name="nama" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="input-kuota">Kuota</label>
-                                    <input id="input-kuota" type="number" name="kuota" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -117,15 +110,11 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('cuti.jenis-cuti.index') }}"
+                    url: "{{ route('izin.jenis-izin.index') }}"
                 },
                 columns: [{
                         data: 'nama',
                         name: 'nama'
-                    },
-                    {
-                        data: 'kuota',
-                        name: 'kuota'
                     },
                     {
                         data: 'status',
@@ -146,8 +135,7 @@
 
         function editData(id) {
             $('#myModal').modal('show');
-            $('#input-nama').val('Tahunan');
-            $('#input-kuota').val('12');
+            $('#input-nama').val('Izin Pulang Cepat');
         }
 
         function deleteData(id) {
@@ -165,7 +153,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{{ route('cuti.jenis-cuti.destroy', 1) }}",
+                        url: "{{ route('izin.jenis-izin.destroy', 1) }}",
                         success: function(res) {
                             Swal.fire({
                                 icon: 'success',
@@ -185,7 +173,7 @@
             e.preventDefault()
             let form = new FormData(this)
             $.ajax({
-                url: "{{ route('cuti.jenis-cuti.store') }}",
+                url: "{{ route('izin.jenis-izin.store') }}",
                 type: "POST",
                 data: form,
                 contentType: false,
