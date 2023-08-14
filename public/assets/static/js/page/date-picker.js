@@ -19,5 +19,5 @@ flatpickr('.flatpickr-time-picker-24h', {
     enableTime: true,
     noCalendar: true,
     dateFormat: "H:i",
-    inline: true
+    inline: false
 })

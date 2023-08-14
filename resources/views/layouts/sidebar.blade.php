@@ -58,8 +58,8 @@
                 </li>
 
                 <li class="sidebar-title">Izin</li>
-                <li class="sidebar-item {{ Request::is('cuti/pengajuan-cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.pengajuan-cuti.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('izin/pengajuan-izin') ? 'active' : '' }}">
+                    <a href="{{ route('izin.pengajuan-izin.index') }}" class='sidebar-link'>
                         <i class="bi bi-clock"></i>
                         <span>Pengajuan Izin</span>
                     </a>
