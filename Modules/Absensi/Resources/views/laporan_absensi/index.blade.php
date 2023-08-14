@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_guru')
 
 @push('custom-css-start')
     <link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
@@ -17,7 +17,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Laporan Absensi</h3>
+                    <h3><a href="{{ route('home') }}"><i class="bi bi-arrow-left"></i></a> Laporan Absensi</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -35,7 +35,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="filter-bulan">Bulan</label>
                                 <select id="filter-bulan" class="choices form-select" onchange="reinitTable()">
@@ -46,7 +46,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="filter-tahun">Tahun</label>
                                 <select id="filter-tahun" class="choices form-select" onchange="reinitTable()">

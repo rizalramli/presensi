@@ -41,41 +41,7 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
-
-                <li class="sidebar-item {{ Request::is('home') ? 'active' : '' }}">
-                    <a href="{{ url('home') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#border-less">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Keluar</span>
-                    </a>
-                </li>
-
                 <li class="sidebar-title">Absensi</li>
-                <li class="sidebar-item {{ Request::is('absensi/masuk-absensi') ? 'active' : '' }}">
-                    <a href="{{ route('absensi.masuk-absensi.index') }}" class='sidebar-link'>
-                        <i class="bi bi-person-bounding-box"></i>
-                        <span>Absensi Masuk</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('absensi/pulang-absensi') ? 'active' : '' }}">
-                    <a href="{{ route('absensi.pulang-absensi.index') }}" class='sidebar-link'>
-                        <i class="bi bi-person-bounding-box"></i>
-                        <span>Absensi Pulang</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('absensi/laporan-absensi') ? 'active' : '' }}">
-                    <a href="{{ route('absensi.laporan-absensi.index') }}" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-check"></i>
-                        <span>Laporan Absensi</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('absensi') ? 'active' : '' }}">
                     <a href="{{ route('absensi.index') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-check"></i>
@@ -84,12 +50,6 @@
                 </li>
 
                 <li class="sidebar-title">Izin</li>
-                <li class="sidebar-item {{ Request::is('izin/pengajuan-izin') ? 'active' : '' }}">
-                    <a href="{{ route('izin.pengajuan-izin.index') }}" class='sidebar-link'>
-                        <i class="bi bi-clock"></i>
-                        <span>Pengajuan Izin</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('izin/persetujuan-izin') ? 'active' : '' }}">
                     <a href="{{ route('izin.persetujuan-izin.index') }}" class='sidebar-link'>
                         <i class="bi-clipboard-check"></i>
@@ -110,12 +70,6 @@
                 </li>
 
                 <li class="sidebar-title">Cuti</li>
-                <li class="sidebar-item {{ Request::is('cuti/pengajuan-cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.pengajuan-cuti.index') }}" class='sidebar-link'>
-                        <i class="bi bi-calendar2-date"></i>
-                        <span>Pengajuan Cuti</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('cuti/persetujuan-cuti') ? 'active' : '' }}">
                     <a href="{{ route('cuti.persetujuan-cuti.index') }}" class='sidebar-link'>
                         <i class="bi-clipboard-check"></i>

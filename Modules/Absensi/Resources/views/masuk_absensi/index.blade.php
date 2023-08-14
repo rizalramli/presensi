@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_guru')
 
 @push('custom-css-start')
     <link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
@@ -17,7 +17,8 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Absensi Masuk</h3>
+                    <h3><a href="{{ route('home') }}"><i class="bi bi-arrow-left"></i></a> Absensi
+                        Masuk</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
