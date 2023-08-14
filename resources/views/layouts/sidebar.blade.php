@@ -130,8 +130,8 @@
                 </li>
 
                 <li class="sidebar-title">Pengaturan</li>
-                <li class="sidebar-item {{ Request::is('cuti/pengajuan-cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.pengajuan-cuti.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('pengaturan/jam-kerja') ? 'active' : '' }}">
+                    <a href="{{ route('pengaturan.jam-kerja.index') }}" class='sidebar-link'>
                         <i class="bi bi-clock-history"></i>
                         <span>Jam Kerja</span>
                     </a>

@@ -11,6 +11,10 @@
 |
 */
 
-Route::prefix('pengaturan')->group(function() {
-    Route::get('/', 'PengaturanController@index');
+use Modules\Pengaturan\Http\Controllers\JamKerjaController;
+
+Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
+    Route::resources([
+        'jam-kerja' => JamKerjaController::class,
+    ]);
 });
