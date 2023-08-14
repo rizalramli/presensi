@@ -44,16 +44,7 @@ class JenisCutiController extends Controller
                     return $row->kuota . " Hari";
                 })
                 ->editColumn('status', function ($row) {
-                    switch ($row->status) {
-                        case "0":
-                            return "<span class='badge bg-danger'>tidak Aktif</span>";
-                            break;
-                        case "1":
-                            return "<span class='badge bg-success'>aktif</span>";
-                            break;
-                        default:
-                            return "<span class='badge bg-danger'>Tidak Diketahui</span>";
-                    }
+                    return '<input type="checkbox" checked>';
                 })
                 ->rawColumns(['status', 'aksi'])
                 ->toJson();

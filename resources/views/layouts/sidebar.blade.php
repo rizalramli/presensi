@@ -70,8 +70,8 @@
                         <span>Persetujuan Cuti</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.index') }}" class='sidebar-link'>
                         <i class="bi bi-list-ul"></i>
                         <span>Daftar Cuti</span>
                     </a>

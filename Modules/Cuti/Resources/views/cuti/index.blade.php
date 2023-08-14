@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('custom-css-start')
+    <link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
+@endpush
+
 @push('custom-css-end')
     <link rel="stylesheet" href="{{ asset('assets/css/pages/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
@@ -13,13 +17,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Jenis Cuti</h3>
+                    <h3>Daftar Cuti</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Jenis Cuti</li>
+                            <li class="breadcrumb-item active" aria-current="page">Daftar Cuti</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,20 +33,60 @@
         <!-- Basic Tables start -->
         <section class="section">
             <div class="card">
-                <div class="card-header">
-                    <div class="float-end">
-                        <a href="#" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#myModal">
-                            Tambah Data</a>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="filter-bulan">Bulan</label>
+                                <select id="filter-bulan" class="choices form-select" onchange="reinitTable()">
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>
+                                            {{ $daftar_bulan[$i] }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="filter-tahun">Tahun</label>
+                                <select id="filter-tahun" class="choices form-select" onchange="reinitTable()">
+                                    @for ($i = date('Y', strtotime('-2 year')); $i <= date('Y'); $i++)
+                                        <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
+                                            {{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="filter-guru">Nama Guru</label>
+                                <select id="filter-guru" class="choices form-select" onchange="reinitTable()">
+                                    <option value="">Semua Guru</option>
+                                    @foreach ($daftar_guru as $item)
+                                        <option value="{{ $item->id_guru }}">
+                                            {{ $item->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
                 </div>
                 <div class="card-body">
                     <table class="table" id="dataTable">
                         <thead>
                             <tr>
-                                <th width="40%">Nama</th>
-                                <th width="20%">Kuota</th>
-                                <th width="20%">Status Aktif</th>
-                                <th width="20%">Aksi</th>
+                                <th width="20%">Nama</th>
+                                <th width="20%">Jenis Cuti</th>
+                                <th width="10%">Dari Tanggal</th>
+                                <th width="10%">Sampai Tanggal</th>
+                                <th width="10%">Jumlah</th>
+                                <th width="15%">Status</th>
+                                <th width="15%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,58 +98,14 @@
         </section>
         <!-- Basic Tables end -->
     </div>
-
-    {{-- modal --}}
-    <form id="form" class="form" enctype="multipart/form-data">
-        <div class="modal fade text-left" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel1">Tambah Data</h5>
-                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mb-2">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="input-nama">Nama</label>
-                                    <input id="input-nama" type="text" name="nama" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="input-kuota">Kuota</label>
-                                    <input id="input-kuota" type="number" name="kuota" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="input-status">Status</label>
-                                    <select class="form-control" id="input-status">
-                                        <option value="1">Aktif</option>
-                                        <option value="0">Tidak Aktif</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary ml-1">Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 @endsection
 
 @push('custom-script')
     <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
     <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
+    <script src="{{ asset('assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
     <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
@@ -126,15 +126,27 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('cuti.jenis-cuti.index') }}"
+                    url: "{{ route('cuti.index') }}"
                 },
                 columns: [{
                         data: 'nama',
                         name: 'nama'
                     },
                     {
-                        data: 'kuota',
-                        name: 'kuota'
+                        data: 'jenis_cuti',
+                        name: 'jenis_cuti'
+                    },
+                    {
+                        data: 'dari_tanggal',
+                        name: 'dari_tanggal'
+                    },
+                    {
+                        data: 'sampai_tanggal',
+                        name: 'sampai_tanggal'
+                    },
+                    {
+                        data: 'jumlah_hari',
+                        name: 'jumlah_hari'
                     },
                     {
                         data: 'status',
@@ -143,7 +155,7 @@
                     {
                         data: 'aksi',
                         name: 'aksi'
-                    },
+                    }
                 ],
             });
         }

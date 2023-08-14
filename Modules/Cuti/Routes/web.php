@@ -11,11 +11,12 @@
 |
 */
 
+use Modules\Cuti\Http\Controllers\CutiController;
 use Modules\Cuti\Http\Controllers\JenisCutiController;
 
 Route::prefix('cuti')->name('cuti.')->group(function () {
-    Route::get('/', 'CutiController@index');
     Route::resources([
+        '/' => CutiController::class,
         'jenis-cuti' => JenisCutiController::class,
     ]);
 });
