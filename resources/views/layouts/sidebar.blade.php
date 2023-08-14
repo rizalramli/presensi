@@ -64,8 +64,8 @@
                         <span>Ajukan Cuti</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('cuti/persetujuan-cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.persetujuan-cuti.index') }}" class='sidebar-link'>
                         <i class="bi-clipboard-check"></i>
                         <span>Persetujuan Cuti</span>
                     </a>
