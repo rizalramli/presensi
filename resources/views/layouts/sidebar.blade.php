@@ -76,6 +76,12 @@
                         <span>Laporan Absensi</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ Request::is('absensi') ? 'active' : '' }}">
+                    <a href="{{ route('absensi.index') }}" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-check"></i>
+                        <span>Laporan Absensi</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-title">Izin</li>
                 <li class="sidebar-item {{ Request::is('izin/pengajuan-izin') ? 'active' : '' }}">

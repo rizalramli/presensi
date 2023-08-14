@@ -17,7 +17,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Laporan Absensi</h3>
+                    <h3>Laporan Absensi Guru</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -69,48 +69,33 @@
                     <p><span class="text-danger me-4">&#10004; : Terlambat Tanpa Toleransi</span></p>
                     <p><span class="me-4">&ndash; : Tidak Hadir</span></p>
                     <div class="table-responsive mt-3">
-                        <table class="table table-bordered" id="dataTable">
+                        <table class="table table-bordered" id="dataTable" width="100%">
                             <thead>
                                 <tr>
                                     <th class="text-center" rowspan="2" width="2%">No</th>
-                                    <th class="text-center" rowspan="2" width="10%">Tanggal</th>
-                                    <th class="text-center" rowspan="2" width="10%">Hari</th>
-                                    <th class="text-center" colspan="2" width="10%">Waktu</th>
-                                    <th class="text-center" rowspan="2" width="10%">Jumlah Jam Kerja</th>
-                                    <th class="text-center" rowspan="2" width="10%">Status</th>
+                                    <th class="text-center" rowspan="2" width="20%">Nama Guru</th>
+                                    <th class="text-center" colspan="31" width="1%">Tanggal</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center">Masuk</th>
-                                    <th class="text-center">Pulang</th>
+                                    @for ($i = 1; $i <= 31; $i++)
+                                        <th class="text-center">{{ $i }}</th>
+                                    @endfor
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="text-center">1</td>
-                                    <td class="text-center">01/08/2023</td>
-                                    <td class="text-center">Selasa</td>
-                                    <td class="text-center">07:19:59</td>
-                                    <td class="text-center">16:04:24</td>
-                                    <td class="text-center">08:44</td>
-                                    <td class="text-center"> <span class="text-success me-4">&#10004;</span></td>
+                                    <td class="text-center">Hasri Wiji</td>
+                                    @for ($i = 1; $i <= 31; $i++)
+                                        <td><span class="text-success">&#10004;</span></td>
+                                    @endfor
                                 </tr>
                                 <tr>
                                     <td class="text-center">2</td>
-                                    <td class="text-center">02/08/2023</td>
-                                    <td class="text-center">Rabu</td>
-                                    <td class="text-center">07:19:59</td>
-                                    <td class="text-center">16:04:24</td>
-                                    <td class="text-center">08:44</td>
-                                    <td class="text-center"><span class="text-warning me-4">&#10004;</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">03/08/2023</td>
-                                    <td class="text-center">Kamis</td>
-                                    <td class="text-center">07:19:59</td>
-                                    <td class="text-center">16:04:24</td>
-                                    <td class="text-center">08:44</td>
-                                    <td class="text-center"><span class="text-danger me-4">&#10004;</span></td>
+                                    <td class="text-center">Rizal Ramli</td>
+                                    @for ($i = 1; $i <= 31; $i++)
+                                        <td><span class="text-danger">&#10004;</span></td>
+                                    @endfor
                                 </tr>
                             </tbody>
                         </table>

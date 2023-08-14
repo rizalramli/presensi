@@ -14,7 +14,8 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        return view('absensi::index');
+        $daftar_bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        return view('absensi::laporan_absensi_guru.index', compact('daftar_bulan'));
     }
 
     /**
