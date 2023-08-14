@@ -70,8 +70,8 @@
                         <span>Persetujuan Izin</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('izin') ? 'active' : '' }}">
+                    <a href="{{ route('izin.index') }}" class='sidebar-link'>
                         <i class="bi bi-list-ul"></i>
                         <span>Daftar Izin</span>
                     </a>

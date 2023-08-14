@@ -12,9 +12,11 @@
 */
 
 use Modules\Izin\Http\Controllers\JenisIzinController;
+use Modules\Izin\Http\Controllers\IzinController;
 
 Route::prefix('izin')->name('izin.')->group(function () {
     Route::resources([
+        '/' => IzinController::class,
         'jenis-izin' => JenisIzinController::class,
     ]);
 });
