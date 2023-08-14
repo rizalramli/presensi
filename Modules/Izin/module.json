@@ -1,0 +1,11 @@
+{
+    "name": "Izin",
+    "alias": "izin",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Izin\\Providers\\IzinServiceProvider"
+    ],
+    "files": []
+}
