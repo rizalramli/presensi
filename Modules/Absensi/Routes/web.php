@@ -11,6 +11,12 @@
 |
 */
 
-Route::prefix('absensi')->group(function() {
-    Route::get('/', 'AbsensiController@index');
+use Modules\Absensi\Http\Controllers\AbsensiController;
+use Modules\Absensi\Http\Controllers\LaporanAbsensiController;
+
+Route::prefix('absensi')->name('absensi.')->group(function () {
+    Route::resources([
+        '/' => AbsensiController::class,
+        'laporan-absensi' => LaporanAbsensiController::class,
+    ]);
 });
