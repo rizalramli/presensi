@@ -79,7 +79,7 @@ class CutiController extends Controller
                             return "<span class='badge bg-success'>disetujui</span>";
                             break;
                         default:
-                            return "<span class='badge bg-danger'>ditolak</span>";
+                            return "<span class='badge bg-danger'>ditolak</span><br><span><u><a href='#'>lihat alasan</u></a></span>";
                     }
                 })
                 ->rawColumns(['status', 'aksi'])

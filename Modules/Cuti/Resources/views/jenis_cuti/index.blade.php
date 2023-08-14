@@ -30,7 +30,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <div class="float-end">
+                    <div class="float-start">
                         <a href="#" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#myModal">
                             Tambah Data</a>
                     </div>

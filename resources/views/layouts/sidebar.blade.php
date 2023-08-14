@@ -58,10 +58,10 @@
                 </li>
 
                 <li class="sidebar-title">Cuti</li>
-                <li class="sidebar-item">
-                    <a href="" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('cuti/pengajuan-cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.pengajuan-cuti.index') }}" class='sidebar-link'>
                         <i class="bi bi-calendar2-date"></i>
-                        <span>Ajukan Cuti</span>
+                        <span>Pengajuan Cuti</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('cuti/persetujuan-cuti') ? 'active' : '' }}">

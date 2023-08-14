@@ -13,10 +13,12 @@
 
 use Modules\Cuti\Http\Controllers\CutiController;
 use Modules\Cuti\Http\Controllers\JenisCutiController;
+use Modules\Cuti\Http\Controllers\PengajuanCutiController;
 use Modules\Cuti\Http\Controllers\PersetujuanCutiController;
 
 Route::prefix('cuti')->name('cuti.')->group(function () {
     Route::resources([
+        'pengajuan-cuti' => PengajuanCutiController::class,
         'persetujuan-cuti' => PersetujuanCutiController::class,
         '/' => CutiController::class,
         'jenis-cuti' => JenisCutiController::class,
