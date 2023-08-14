@@ -130,6 +130,12 @@
                 </li>
 
                 <li class="sidebar-title">Pengaturan</li>
+                <li class="sidebar-item {{ Request::is('pengaturan/hari-libur') ? 'active' : '' }}">
+                    <a href="{{ route('pengaturan.hari-libur.index') }}" class='sidebar-link'>
+                        <i class="bi bi-calendar3"></i>
+                        <span>Hari Libur</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('pengaturan/lokasi') ? 'active' : '' }}">
                     <a href="{{ route('pengaturan.lokasi.index') }}" class='sidebar-link'>
                         <i class="bi bi-geo-alt"></i>
