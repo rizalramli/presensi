@@ -130,6 +130,12 @@
                 </li>
 
                 <li class="sidebar-title">Pengaturan</li>
+                <li class="sidebar-item {{ Request::is('pengaturan/lokasi') ? 'active' : '' }}">
+                    <a href="{{ route('pengaturan.lokasi.index') }}" class='sidebar-link'>
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Lokasi</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('pengaturan/jam-kerja') ? 'active' : '' }}">
                     <a href="{{ route('pengaturan.jam-kerja.index') }}" class='sidebar-link'>
                         <i class="bi bi-clock-history"></i>

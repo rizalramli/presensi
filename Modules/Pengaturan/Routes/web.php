@@ -12,9 +12,11 @@
 */
 
 use Modules\Pengaturan\Http\Controllers\JamKerjaController;
+use Modules\Pengaturan\Http\Controllers\LokasiController;
 
 Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
     Route::resources([
+        'lokasi' => LokasiController::class,
         'jam-kerja' => JamKerjaController::class,
     ]);
 });
