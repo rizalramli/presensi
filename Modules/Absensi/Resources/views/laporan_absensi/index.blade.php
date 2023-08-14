@@ -23,7 +23,7 @@
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Daftar Izin</li>
+                            <li class="breadcrumb-item active" aria-current="page">Laporan Absensi</li>
                         </ol>
                     </nav>
                 </div>

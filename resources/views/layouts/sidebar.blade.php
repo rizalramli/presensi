@@ -58,6 +58,18 @@
                 </li>
 
                 <li class="sidebar-title">Absensi</li>
+                <li class="sidebar-item {{ Request::is('absensi/masuk-absensi') ? 'active' : '' }}">
+                    <a href="{{ route('absensi.masuk-absensi.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-bounding-box"></i>
+                        <span>Absensi Masuk</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('absensi/pulang-absensi') ? 'active' : '' }}">
+                    <a href="{{ route('absensi.pulang-absensi.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-bounding-box"></i>
+                        <span>Absensi Pulang</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('absensi/laporan-absensi') ? 'active' : '' }}">
                     <a href="{{ route('absensi.laporan-absensi.index') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-check"></i>

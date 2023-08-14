@@ -13,10 +13,14 @@
 
 use Modules\Absensi\Http\Controllers\AbsensiController;
 use Modules\Absensi\Http\Controllers\LaporanAbsensiController;
+use Modules\Absensi\Http\Controllers\MasukAbsensiController;
+use Modules\Absensi\Http\Controllers\PulangAbsensiController;
 
 Route::prefix('absensi')->name('absensi.')->group(function () {
     Route::resources([
         '/' => AbsensiController::class,
+        'masuk-absensi' => MasukAbsensiController::class,
+        'pulang-absensi' => PulangAbsensiController::class,
         'laporan-absensi' => LaporanAbsensiController::class,
     ]);
 });
