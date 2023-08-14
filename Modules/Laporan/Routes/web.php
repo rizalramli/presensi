@@ -11,6 +11,14 @@
 |
 */
 
-Route::prefix('laporan')->group(function() {
-    Route::get('/', 'LaporanController@index');
+use Modules\Laporan\Http\Controllers\LaporanAbsensiController;
+use Modules\Laporan\Http\Controllers\LaporanIzinController;
+use Modules\Laporan\Http\Controllers\LaporanCutiController;
+
+Route::prefix('laporan')->name('laporan.')->group(function () {
+    Route::resources([
+        'absensi' => LaporanAbsensiController::class,
+        'izin' => LaporanIzinController::class,
+        'cuti' => LaporanCutiController::class,
+    ]);
 });
