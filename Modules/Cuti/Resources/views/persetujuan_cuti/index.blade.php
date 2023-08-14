@@ -188,7 +188,7 @@
                                 <div class="form-group">
                                     <label for="input-keterangan">Keterangan Penolakan</label>
                                     <textarea name="" id="input-keterangan" name="keterangan" class="form-control" rows="3">ada tugas yang perlu diselesaikan</textarea>
-                                    <small class="text-danger">* isi jika cuti ditolak</small>
+                                    <small class="text-danger">* isi keterangan jika cuti ditolak</small>
                                 </div>
                             </div>
                         </div>

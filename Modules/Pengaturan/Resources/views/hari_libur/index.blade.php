@@ -37,18 +37,20 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th width="20%">Tanggal</th>
-                                <th width="40%">Nama</th>
-                                <th width="20%">Status Aktif</th>
-                                <th width="20%">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable" width="100%">
+                            <thead>
+                                <tr>
+                                    <th width="20%">Tanggal</th>
+                                    <th width="40%">Nama</th>
+                                    <th width="20%">Status Aktif</th>
+                                    <th width="20%">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
