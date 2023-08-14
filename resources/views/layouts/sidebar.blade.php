@@ -64,8 +64,8 @@
                         <span>Pengajuan Izin</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('cuti/persetujuan-cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.persetujuan-cuti.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('izin/persetujuan-izin') ? 'active' : '' }}">
+                    <a href="{{ route('izin.persetujuan-izin.index') }}" class='sidebar-link'>
                         <i class="bi-clipboard-check"></i>
                         <span>Persetujuan Izin</span>
                     </a>

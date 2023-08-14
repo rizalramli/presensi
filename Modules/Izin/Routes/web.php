@@ -13,9 +13,11 @@
 
 use Modules\Izin\Http\Controllers\JenisIzinController;
 use Modules\Izin\Http\Controllers\IzinController;
+use Modules\Izin\Http\Controllers\PersetujuanIzinController;
 
 Route::prefix('izin')->name('izin.')->group(function () {
     Route::resources([
+        'persetujuan-izin' => PersetujuanIzinController::class,
         '/' => IzinController::class,
         'jenis-izin' => JenisIzinController::class,
     ]);
