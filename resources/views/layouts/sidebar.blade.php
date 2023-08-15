@@ -1,10 +1,23 @@
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
-        <div class="sidebar-header position-relative">
+        <div class="px-4 pt-4">
+            <table width="100%">
+                <tr>
+                    <td width="10%">
+                        <div class="logo me-3"><img width="50px" height="50px"
+                                src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" srcset="">
+                        </div>
+                    </td>
+                    <td>
+                        <span><small>MA MIFTAHUL ULUM PANDANWANGI</small></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="sidebar-header position-relative pb-0">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="{{ url('home') }}"><img src="{{ asset('assets/images/logo/logo.svg') }}" alt="Logo"
-                            srcset=""></a>
+                    <small class="fs-6">Ubah Tema</small>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

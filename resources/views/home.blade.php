@@ -18,9 +18,23 @@
         <!-- Basic Tables start -->
         <section class="section">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title text-primary">Selamat Pagi !</h4>
+                <div class="card-header pb-0">
+                    <h4 class="card-title">
+                        <table width="100%">
+                            <tr>
+                                <td width="10%">
+                                    <div class="logo me-3"><img width="50px" height="50px"
+                                            src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" srcset="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <span><small>MA MIFTAHUL ULUM PANDANWANGI</small></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </h4>
                 </div>
+                <hr>
                 <div class="card-body">
                     <table width="100%">
                         <tr>
