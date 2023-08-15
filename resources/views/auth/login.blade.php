@@ -17,9 +17,11 @@
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
-                    <div class="auth-logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('assets/images/logo/logo.svg') }}"
-                                alt="Logo"></a>
+                    <div class="text-center pb-5">
+                        <div class="logo mb-3"><img width="100px" height="100px"
+                                src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" srcset="">
+                        </div>
+                        <span><small>MA MIFTAHUL ULUM PANDANWANGI</small></span>
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">
@@ -27,7 +29,7 @@
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" name="email"
                                 class="form-control form-control-xl @error('email') is-invalid @enderror"
-                                value="{{ old('email') }}" placeholder="Username">
+                                value="{{ old('email') }}" placeholder="Email">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
