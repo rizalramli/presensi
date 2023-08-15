@@ -99,7 +99,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card">
-                        <div class="card-header fw-bold">
+                        <div class="card-header fw-bold text-center">
                             Rizal Ramli
                         </div>
                         <div class="card-body">
@@ -116,7 +116,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card">
-                        <div class="card-header fw-bold">
+                        <div class="card-header fw-bold text-center">
                             Rizal Ramli
                         </div>
                         <div class="card-body">
