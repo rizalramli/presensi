@@ -23,4 +23,5 @@ Route::prefix('absensi')->name('absensi.')->group(function () {
         'pulang-absensi' => PulangAbsensiController::class,
         'laporan-absensi' => LaporanAbsensiController::class,
     ]);
+    Route::get('laporan-absensi2', [LaporanAbsensiController::class, 'index2'])->name('laporan-absensi2');
 });

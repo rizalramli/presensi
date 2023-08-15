@@ -50,6 +50,12 @@
                 </li>
                 <li class="sidebar-item {{ Request::is('absensi') ? 'active' : '' }}">
                     <a href="{{ route('absensi.index') }}" class='sidebar-link'>
+                        <i class="bi bi-list-ul"></i>
+                        <span>Daftar Absensi</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('absensi/laporan-absensi2') ? 'active' : '' }}">
+                    <a href="{{ route('absensi.laporan-absensi2') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-check"></i>
                         <span>Laporan Absensi</span>
                     </a>
