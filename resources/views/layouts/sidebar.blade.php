@@ -42,6 +42,12 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Absensi</li>
+                <li class="sidebar-item {{ Request::is('home2') ? 'active' : '' }}">
+                    <a href="{{ route('home2') }}" class='sidebar-link'>
+                        <i class="bi bi-house"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('absensi') ? 'active' : '' }}">
                     <a href="{{ route('absensi.index') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-check"></i>
@@ -50,12 +56,6 @@
                 </li>
 
                 <li class="sidebar-title">Izin</li>
-                <li class="sidebar-item {{ Request::is('izin/persetujuan-izin') ? 'active' : '' }}">
-                    <a href="{{ route('izin.persetujuan-izin.index') }}" class='sidebar-link'>
-                        <i class="bi-clipboard-check"></i>
-                        <span>Persetujuan Izin</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('izin') ? 'active' : '' }}">
                     <a href="{{ route('izin.index') }}" class='sidebar-link'>
                         <i class="bi bi-list-ul"></i>
@@ -70,12 +70,6 @@
                 </li>
 
                 <li class="sidebar-title">Cuti</li>
-                <li class="sidebar-item {{ Request::is('cuti/persetujuan-cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.persetujuan-cuti.index') }}" class='sidebar-link'>
-                        <i class="bi-clipboard-check"></i>
-                        <span>Persetujuan Cuti</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('cuti') ? 'active' : '' }}">
                     <a href="{{ route('cuti.index') }}" class='sidebar-link'>
                         <i class="bi bi-list-ul"></i>

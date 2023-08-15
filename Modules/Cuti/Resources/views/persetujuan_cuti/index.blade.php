@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_guru')
 
 @push('custom-css-start')
     <link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
@@ -15,15 +15,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Persetujuan Cuti</h3>
-                </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Persetujuan Cuti</li>
-                        </ol>
-                    </nav>
+                    <h3><a href="{{ route('home') }}"><i class="bi bi-arrow-left"></i></a> Persetujuan Cuti</h3>
                 </div>
             </div>
         </div>
@@ -85,7 +77,7 @@
                                     data-bs-target="#myModalBerkas"><u>lihat berkas</u></a></p>
                             <p class="text-center">
                                 <button data-bs-toggle="modal" data-bs-target="#myModalKonfirmasi"
-                                    class="btn btn-success">Konfirmasi</button>
+                                    class="btn btn-sm btn-success">Konfirmasi</button>
                             </p>
                         </div>
                     </div>
@@ -103,7 +95,7 @@
                                     data-bs-target="#myModalBerkas"><u>lihat berkas</u></a></p>
                             <p class="text-center">
                                 <button data-bs-toggle="modal" data-bs-target="#myModalKonfirmasi"
-                                    class="btn btn-success">Konfirmasi</button>
+                                    class="btn btn-sm btn-success">Konfirmasi</button>
                             </p>
                         </div>
                     </div>

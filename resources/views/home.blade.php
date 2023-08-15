@@ -127,6 +127,30 @@
                     </a>
                 </div>
                 <div class="col-6 text-center">
+                    <a href="{{ route('izin.persetujuan-izin.index') }}" class="text-primary">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="py-2">
+                                    <i class="bi bi-check2-circle h1"></i>
+                                </p>
+                                <p class="fw-bold">Persetujuan Izin</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 text-center">
+                    <a href="{{ route('cuti.persetujuan-cuti.index') }}" class="text-primary">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="py-2">
+                                    <i class="bi bi-calendar-check h1"></i>
+                                </p>
+                                <p class="fw-bold">Persetujuan Cuti</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 text-center">
                     <a href="{{ route('absensi.laporan-absensi.index') }}" class="text-primary">
                         <div class="card">
                             <div class="card-body">
