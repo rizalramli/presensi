@@ -15,14 +15,6 @@
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Jenis Izin</h3>
                 </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Jenis Izin</li>
-                        </ol>
-                    </nav>
-                </div>
             </div>
         </div>
 

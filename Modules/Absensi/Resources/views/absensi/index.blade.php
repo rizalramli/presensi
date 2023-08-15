@@ -19,14 +19,6 @@
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Daftar Absensi</h3>
                 </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Daftar Cuti</li>
-                        </ol>
-                    </nav>
-                </div>
             </div>
         </div>
 
@@ -121,8 +113,7 @@
                                     <td class="text-center">01/08/2023</td>
                                     <td class="text-center">Selasa</td>
                                     <td class="text-center">07:19:59
-                                        <span><a href="#" data-bs-toggle="modal"
-                                                data-bs-target="#myModalBerkas">lihat
+                                        <span><a href="#" data-bs-toggle="modal" data-bs-target="#myModalBerkas">lihat
                                                 detail</a></span>
                                     </td>
                                     <td class="text-center">16:04:24
