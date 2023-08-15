@@ -128,6 +128,12 @@
                         <span>Jam Kerja</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#border-less">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Keluar</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -151,14 +157,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Batal</span>
+                    <i class="bx bx-x"></i>
+                    <span>Batal</span>
                 </button>
 
                 <a class="btn btn-primary ml-1" href="{{ route('logout') }}"
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Ya, Saya Yakin !</span>
+                    <i class="bx bx-check"></i>
+                    <span>Ya, Saya Yakin !</span>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
