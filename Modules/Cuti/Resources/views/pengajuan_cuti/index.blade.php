@@ -94,16 +94,17 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#myModal">Ajukan</button>
+                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#myModal"><i
+                            class="bi bi-plus"></i> Ajukan</button>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header fw-bold">
                             Rizal Ramli
                         </div>
                         <div class="card-body">
                             <p class="text-muted">01/08/2023 - 02/08/2023</p>
-                            <p class="text-muted">2 hari</p>
+                            <p class="text-muted fw-bold">2 hari</p>
                             <p class="text-muted"><span class="badge bg-primary">Sakit</span></p>
                             <p class="text-muted"><a href="#" data-bs-toggle="modal"
                                     data-bs-target="#myModalBerkas"><u>lihat berkas</u></a></p>
@@ -115,12 +116,12 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header fw-bold">
                             Rizal Ramli
                         </div>
                         <div class="card-body">
                             <p class="text-muted">01/08/2023 - 02/08/2023</p>
-                            <p class="text-muted">2 hari</p>
+                            <p class="text-muted fw-bold">2 hari</p>
                             <p class="text-muted"><span class="badge bg-primary">Sakit</span></p>
                             <p class="text-muted"><a href="#" data-bs-toggle="modal"
                                     data-bs-target="#myModalBerkas"><u>lihat berkas</u></a>
