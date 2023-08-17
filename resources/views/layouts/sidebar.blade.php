@@ -94,8 +94,8 @@
                 </li>
 
                 <li class="sidebar-title">Cuti</li>
-                <li class="sidebar-item {{ Request::is('cuti') ? 'active' : '' }}">
-                    <a href="{{ route('cuti.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('cuti/daftar-cuti') ? 'active' : '' }}">
+                    <a href="{{ route('cuti.daftar-cuti.index') }}" class='sidebar-link'>
                         <i class="bi bi-list-ul"></i>
                         <span>Daftar Cuti</span>
                     </a>

@@ -271,32 +271,5 @@
                 }
             })
         }
-
-        $('#form').submit(function(e) {
-            e.preventDefault()
-            let form = new FormData(this)
-            $.ajax({
-                url: "{{ route('izin.jenis-izin.store') }}",
-                type: "POST",
-                data: form,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(data) {
-                    $('#myModal').modal('hide');
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Sukses',
-                        text: 'Data berhasil disimpan!',
-                        willClose: () => {
-                            reinitTable()
-                        }
-                    })
-                },
-                error: function(request, msg, error) {
-                    console.log(msg)
-                }
-            });
-        });
     </script>
 @endpush

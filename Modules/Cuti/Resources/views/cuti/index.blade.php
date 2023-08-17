@@ -55,7 +55,7 @@
                                 <select id="filter-guru" class="choices form-select" onchange="reinitTable()">
                                     <option value="">Semua Guru</option>
                                     @foreach ($daftar_guru as $item)
-                                        <option value="{{ $item->id_guru }}">
+                                        <option value="{{ $item->id }}">
                                             {{ $item->nama }}
                                         </option>
                                     @endforeach
@@ -74,12 +74,13 @@
                             <thead>
                                 <tr>
                                     <th width="20%">Nama</th>
-                                    <th width="20%">Jenis Cuti</th>
+                                    <th width="15%">Jenis Cuti</th>
                                     <th width="10%">Dari Tanggal</th>
                                     <th width="10%">Sampai Tanggal</th>
                                     <th width="10%">Jumlah</th>
+                                    <th width="10%">Berkas</th>
                                     <th width="15%">Status</th>
-                                    <th width="15%">Aksi</th>
+                                    <th width="5%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,6 +92,71 @@
 
         </section>
         <!-- Basic Tables end -->
+        {{-- Detail Berkas --}}
+        <div class="modal fade text-left" id="myModalBerkas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel1">Berkas</h5>
+                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="input-kuota">Foto</label>
+                                    <div class="text-center">
+                                        <img id="input-bukti-foto" width="100%" src="" class="rounded"
+                                            alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="input-keterangan">Keterangan</label>
+                                    <textarea id="input-keterangan" name="keterangan" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Detail Berkas --}}
+        <div class="modal fade text-left" id="myModalPenolakan" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel1">Alasan Penolakan</h5>
+                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="input-keterangan-penolakan">Keterangan</label>
+                                    <textarea id="input-keterangan-penolakan" name="keterangan" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
 
@@ -120,7 +186,12 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('cuti.index') }}"
+                    url: "{{ route('cuti.daftar-cuti.index') }}",
+                    data: function(d) {
+                        d.bulan = $('#filter-bulan').val(),
+                            d.tahun = $('#filter-tahun').val(),
+                            d.guru = $('#filter-guru').val()
+                    }
                 },
                 columns: [{
                         data: 'nama',
@@ -139,8 +210,12 @@
                         name: 'sampai_tanggal'
                     },
                     {
-                        data: 'jumlah_hari',
-                        name: 'jumlah_hari'
+                        data: 'lama_hari',
+                        name: 'lama_hari'
+                    },
+                    {
+                        data: 'bukti_foto',
+                        name: 'bukti_foto'
                     },
                     {
                         data: 'status',
@@ -159,13 +234,21 @@
             initTable()
         }
 
-        function editData(id) {
-            $('#myModal').modal('show');
-            $('#input-nama').val('Tahunan');
-            $('#input-kuota').val('12');
+        function detailBerkas(bukti_foto, keterangan) {
+            $('#myModalBerkas').modal('show')
+            let url = "{{ asset('assets/images/cuti') }}" + '/' + bukti_foto
+            $("#input-bukti-foto").attr("src", url)
+            $('#input-keterangan').val(keterangan)
+        }
+
+        function detailPenolakan(keterangan) {
+            $('#myModalPenolakan').modal('show')
+            $('#input-keterangan-penolakan').val(keterangan)
         }
 
         function deleteData(id) {
+            let url = "{{ route('cuti.daftar-cuti.destroy', ':id') }}"
+            url = url.replace(':id', id)
             Swal.fire({
                 title: 'Konfirmasi',
                 text: "Apakah anda yakin ingin menghapus?",
@@ -180,7 +263,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{{ route('cuti.jenis-cuti.destroy', 1) }}",
+                        url: url,
                         success: function(res) {
                             Swal.fire({
                                 icon: 'success',
@@ -195,32 +278,5 @@
                 }
             })
         }
-
-        $('#form').submit(function(e) {
-            e.preventDefault()
-            let form = new FormData(this)
-            $.ajax({
-                url: "{{ route('cuti.jenis-cuti.store') }}",
-                type: "POST",
-                data: form,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(data) {
-                    $('#myModal').modal('hide');
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Sukses',
-                        text: 'Data berhasil disimpan!',
-                        willClose: () => {
-                            reinitTable()
-                        }
-                    })
-                },
-                error: function(request, msg, error) {
-                    console.log(msg)
-                }
-            });
-        });
     </script>
 @endpush

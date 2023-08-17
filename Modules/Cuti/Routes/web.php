@@ -20,7 +20,7 @@ Route::prefix('cuti')->name('cuti.')->group(function () {
     Route::resources([
         'pengajuan-cuti' => PengajuanCutiController::class,
         'persetujuan-cuti' => PersetujuanCutiController::class,
-        '/' => CutiController::class,
+        'daftar-cuti' => CutiController::class,
         'jenis-cuti' => JenisCutiController::class,
     ]);
 });
