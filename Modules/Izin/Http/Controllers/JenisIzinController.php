@@ -2,6 +2,7 @@
 
 namespace Modules\Izin\Http\Controllers;
 
+use App\Models\JenisIzin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,89 +17,46 @@ class JenisIzinController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $data = [
-                (object)[
-                    'nama' => 'Izin Terlambat',
-                    'status' => 1,
-                ],
-                (object)[
-                    'nama' => 'Izin Pulang Cepat',
-                    'status' => 1,
-                ]
-            ];
+            $data = JenisIzin::getData();
+
             return DataTables::of($data)
                 ->addColumn('aksi', function ($row) {
                     $aksi = '';
-                    $aksi .= '<span class="badge bg-warning me-1"><a href="javascript:void(0)" onclick="editData(1)" class="text-white">edit</a></span>';
-                    $aksi .= '<span class="badge bg-danger"><a href="javascript:void(0)" onclick="deleteData(1)" class="text-white">hapus</a></span>';
+                    $aksi .= '<span class="badge bg-warning me-1"><a href="javascript:void(0)" onclick="editData(' . $row->id . ')" class="text-white">edit</a></span>';
+                    $aksi .= '<span class="badge bg-danger"><a href="javascript:void(0)" onclick="deleteData(' . $row->id . ')" class="text-white">hapus</a></span>';
                     return $aksi;
                 })
-                ->editColumn('status', function ($row) {
-                    return '<input type="checkbox" checked>';
+                ->editColumn('is_aktif', function ($row) {
+                    $checked = $row->is_aktif == 1 ? 'checked' : '';
+                    return '<input id="checkbox' . $row->id . '" onclick="updateData(' . $row->id . ')" type="checkbox" ' . $checked . '>';
                 })
-                ->rawColumns(['status', 'aksi'])
+                ->rawColumns(['is_aktif', 'aksi'])
                 ->toJson();
         }
         return view('izin::jenis_izin.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function store()
     {
-        return view('cuti::create');
+        $data = JenisIzin::simpanData(request());
+        return Response()->json($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('cuti::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function edit($id)
     {
-        return view('cuti::edit');
+        $data = JenisIzin::editData($id);
+        return response()->json($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
-        //
+        $data = JenisIzin::updateData($request, $id);
+        return Response()->json($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function destroy($id)
     {
-        //
+        $data = JenisIzin::deleteData($id);
+        return Response()->json($data);
     }
 }
