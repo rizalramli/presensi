@@ -24,38 +24,41 @@
 
         <!-- Basic Tables start -->
         <section class="section">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="input-kuota">Lattitude Google Maps</label>
-                                <input id="input-kuota" type="text" name="kuota" value="-7.282356,112"
-                                    class="form-control">
+            <form id="form" class="form">
+                <input type="hidden" id="input-id" name="id" value="{{ $data->id }}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="input-latitude">Latitude Google Maps</label>
+                                    <input id="input-latitude" type="text" name="latitude" value="{{ $data->latitude }}"
+                                        class="form-control" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="input-kuota">Longitude Google Maps</label>
-                                <input id="input-kuota" type="text" name="kuota" value="112.7949253"
-                                    class="form-control">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="input-longitude">Longitude Google Maps</label>
+                                    <input id="input-longitude" type="text" name="longitude"
+                                        value="{{ $data->longitude }}" class="form-control" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="input-kuota">Radius (meter)</label>
-                                <input id="input-kuota" type="text" name="kuota" value="20" class="form-control">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="input-radius-absensi">Radius (meter)</label>
+                                    <input id="input-radius-absensi" type="text" name="radius_absensi"
+                                        value="{{ $data->radius_absensi }}" class="form-control" required>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary">Simpan</button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary">Simpan</button>
-                </div>
-            </div>
-
+            </form>
         </section>
-        <!-- Basic Tables end -->
+
     </div>
 @endsection
 
@@ -78,5 +81,29 @@
                 }
             });
         }
+
+        $('#form').submit(function(e) {
+            e.preventDefault()
+            let form = new FormData(this)
+            $.ajax({
+                url: "{{ route('pengaturan.lokasi.store') }}",
+                type: "POST",
+                data: form,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: 'Data berhasil disimpan!',
+                        willClose: () => {}
+                    })
+                },
+                error: function(request, msg, error) {
+                    console.log(msg)
+                }
+            })
+        })
     </script>
 @endpush
