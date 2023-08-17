@@ -68,7 +68,7 @@
                 </li>
                 <li class="sidebar-item {{ Request::is('absensi') ? 'active' : '' }}">
                     <a href="{{ route('absensi.index') }}" class='sidebar-link'>
-                        <i class="bi bi-list-ul"></i>
+                        <i class="bi bi-person-bounding-box"></i>
                         <span>Daftar Absensi</span>
                     </a>
                 </li>
@@ -82,7 +82,7 @@
                 <li class="sidebar-title">Izin</li>
                 <li class="sidebar-item {{ Request::is('izin/daftar-izin') ? 'active' : '' }}">
                     <a href="{{ route('izin.daftar-izin.index') }}" class='sidebar-link'>
-                        <i class="bi bi-list-ul"></i>
+                        <i class="bi bi-clock"></i>
                         <span>Daftar Izin</span>
                     </a>
                 </li>
@@ -96,7 +96,7 @@
                 <li class="sidebar-title">Cuti</li>
                 <li class="sidebar-item {{ Request::is('cuti/daftar-cuti') ? 'active' : '' }}">
                     <a href="{{ route('cuti.daftar-cuti.index') }}" class='sidebar-link'>
-                        <i class="bi bi-list-ul"></i>
+                        <i class="bi bi-calendar2-date"></i>
                         <span>Daftar Cuti</span>
                     </a>
                 </li>
