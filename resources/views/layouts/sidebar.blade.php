@@ -107,26 +107,6 @@
                     </a>
                 </li>
 
-                <li class="sidebar-title">Laporan</li>
-                <li class="sidebar-item {{ Request::is('laporan/absensi') ? 'active' : '' }}">
-                    <a href="{{ route('laporan.absensi.index') }}" class='sidebar-link'>
-                        <i class="bi bi-person-bounding-box"></i>
-                        <span>Laporan Absensi</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('laporan/izin') ? 'active' : '' }}">
-                    <a href="{{ route('laporan.izin.index') }}" class='sidebar-link'>
-                        <i class="bi bi-clock"></i>
-                        <span>Laporan Izin</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ Request::is('laporan/cuti') ? 'active' : '' }}">
-                    <a href="{{ route('laporan.cuti.index') }}" class='sidebar-link'>
-                        <i class="bi bi-calendar2-date"></i>
-                        <span>Laporan Cuti</span>
-                    </a>
-                </li>
-
                 <li class="sidebar-title">Pengaturan</li>
                 <li class="sidebar-item {{ Request::is('pengaturan/hari-libur') ? 'active' : '' }}">
                     <a href="{{ route('pengaturan.hari-libur.index') }}" class='sidebar-link'>
