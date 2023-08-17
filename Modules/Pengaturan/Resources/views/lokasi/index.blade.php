@@ -46,7 +46,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="input-radius-absensi">Radius (meter)</label>
-                                    <input id="input-radius-absensi" type="text" name="radius_absensi"
+                                    <input id="input-radius-absensi" type="number" name="radius_absensi"
                                         value="{{ $data->radius_absensi }}" class="form-control" required>
                                 </div>
                             </div>
