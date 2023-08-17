@@ -20,7 +20,7 @@ Route::prefix('izin')->name('izin.')->group(function () {
     Route::resources([
         'pengajuan-izin' => PengajuanIzinController::class,
         'persetujuan-izin' => PersetujuanIzinController::class,
-        '/' => IzinController::class,
+        'daftar-izin' => IzinController::class,
         'jenis-izin' => JenisIzinController::class,
     ]);
 });

@@ -80,8 +80,8 @@
                 </li>
 
                 <li class="sidebar-title">Izin</li>
-                <li class="sidebar-item {{ Request::is('izin') ? 'active' : '' }}">
-                    <a href="{{ route('izin.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('izin/daftar-izin') ? 'active' : '' }}">
+                    <a href="{{ route('izin.daftar-izin.index') }}" class='sidebar-link'>
                         <i class="bi bi-list-ul"></i>
                         <span>Daftar Izin</span>
                     </a>
