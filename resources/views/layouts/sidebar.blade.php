@@ -1,3 +1,8 @@
+@php
+    $sql = 'SELECT * FROM instansi';
+    
+    $result = DB::selectOne($sql);
+@endphp
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <div class="px-4 pt-4">
@@ -5,11 +10,11 @@
                 <tr>
                     <td width="10%">
                         <div class="logo me-3"><img width="50px" height="50px"
-                                src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" srcset="">
+                                src="{{ asset('assets/images/logo/' . $result->logo) }}" alt="Logo" srcset="">
                         </div>
                     </td>
                     <td>
-                        <span><small>MA MIFTAHUL ULUM PANDANWANGI</small></span>
+                        <span><small>{{ $result->nama_sekolah }}</small></span>
                     </td>
                 </tr>
             </table>
@@ -127,6 +132,12 @@
                     <a href="{{ route('pengaturan.hari-libur.index') }}" class='sidebar-link'>
                         <i class="bi bi-calendar3"></i>
                         <span>Hari Libur</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ Request::is('pengaturan/instansi') ? 'active' : '' }}">
+                    <a href="{{ route('pengaturan.instansi.index') }}" class='sidebar-link'>
+                        <i class="bi bi-building"></i>
+                        <span>Instansi</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ Request::is('pengaturan/lokasi') ? 'active' : '' }}">

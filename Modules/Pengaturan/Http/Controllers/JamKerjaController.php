@@ -4,7 +4,6 @@ namespace Modules\Pengaturan\Http\Controllers;
 
 use App\Models\Instansi;
 use App\Models\JamKerja;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class JamKerjaController extends Controller

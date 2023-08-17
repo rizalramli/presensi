@@ -1,14 +1,19 @@
+@php
+    $sql = 'SELECT * FROM instansi';
+    
+    $result = DB::selectOne($sql);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MA MIFTAHUL ULUM PANDANWANGI</title>
+    <title>{{ $result->logo }}</title>
     <link rel="stylesheet" href="{{ asset('assets/css/main/app.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/auth.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/' . $result->logo) }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo/' . $result->logo) }}" type="image/png">
 </head>
 
 <body>
@@ -19,9 +24,9 @@
                 <div id="auth-left">
                     <div class="text-center pb-5">
                         <div class="logo mb-3"><img width="100px" height="100px"
-                                src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" srcset="">
+                                src="{{ asset('assets/images/logo/' . $result->logo) }}" alt="Logo" srcset="">
                         </div>
-                        <span><small>MA MIFTAHUL ULUM PANDANWANGI</small></span>
+                        <span><small>{{ $result->nama_sekolah }}</small></span>
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">

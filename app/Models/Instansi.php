@@ -33,6 +33,19 @@ class Instansi extends Model
         return $result;
     }
 
+    public static function simpanData($request)
+    {
+        $sql = DB::table('instansi')
+            ->where('id', $request->id)
+            ->update([
+                'nama_sekolah' => $request->nama_sekolah,
+                'alamat' => $request->alamat,
+                'logo' => $request->logo
+            ]);
+
+        return $sql;
+    }
+
     public static function simpanDataLokasi($request)
     {
         $sql = DB::table('instansi')

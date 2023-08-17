@@ -12,12 +12,14 @@
 */
 
 use Modules\Pengaturan\Http\Controllers\JamKerjaController;
+use Modules\Pengaturan\Http\Controllers\InstansiController;
 use Modules\Pengaturan\Http\Controllers\LokasiController;
 use Modules\Pengaturan\Http\Controllers\HariLiburController;
 
 Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
     Route::resources([
         'hari-libur' => HariLiburController::class,
+        'instansi' => InstansiController::class,
         'lokasi' => LokasiController::class,
         'jam-kerja' => JamKerjaController::class,
     ]);
