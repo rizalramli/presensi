@@ -24,8 +24,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="float-start">
-                        <a href="#" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#myModal">
-                            Tambah Data</a>
+                        <button type="button" class='btn btn-primary' onclick="tambahData()">
+                            Tambah Data</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -66,14 +66,17 @@
                         <div class="row mb-2">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="input-nama">Tanggal</label>
-                                    <input type="date" class="form-control mb-3 flatpickr-no-config" />
+                                    <label for="input-tanggal">Tanggal</label>
+                                    <input id="input-tanggal" type="date" name="tanggal"
+                                        class="form-control mb-3 flatpickr-no-config" />
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="input-nama">Nama</label>
-                                    <input id="input-nama" type="text" name="nama" class="form-control">
+                                    <input id="input-id" type="hidden" name="id">
+                                    <input id="input-is-aktif" type="hidden" name="is_aktif" value="1">
+                                    <input id="input-nama" type="text" name="nama" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -99,14 +102,14 @@
         $(document).ready(function() {
             ajaxSetup()
             initTable()
-        });
+        })
 
         function ajaxSetup() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
+            })
         }
 
         function initTable() {
@@ -125,15 +128,15 @@
                         name: 'nama'
                     },
                     {
-                        data: 'status',
-                        name: 'status'
+                        data: 'is_aktif',
+                        name: 'is_aktif'
                     },
                     {
                         data: 'aksi',
                         name: 'aksi'
                     },
                 ],
-            });
+            })
         }
 
         function reinitTable() {
@@ -141,11 +144,78 @@
             initTable()
         }
 
+        function tambahData() {
+            $('#form').trigger("reset")
+            $('#myModal').modal('show')
+        }
+
+        $('#form').submit(function(e) {
+            e.preventDefault()
+            let form = new FormData(this)
+            $.ajax({
+                url: "{{ route('pengaturan.hari-libur.store') }}",
+                type: "POST",
+                data: form,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    $('#myModal').modal('hide')
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: 'Data berhasil disimpan!',
+                        willClose: () => {
+                            reinitTable()
+                        }
+                    })
+                },
+                error: function(request, msg, error) {
+                    console.log(msg)
+                }
+            })
+        })
+
         function editData(id) {
-            $('#myModal').modal('show');
+            $('#myModal').modal('show')
+            $.get("hari-libur/" + id + "/edit", function(data) {
+                $('#input-id').val(data.id)
+                $('#input-tanggal').val(data.tanggal)
+                $('#input-nama').val(data.nama)
+                $('#input-is-aktif').val(data.is_aktif)
+            })
+        }
+
+        function updateData(id) {
+            var isChecked = $("#checkbox" + id).prop("checked");
+            var is_aktif;
+            var text;
+            (isChecked == true) ? is_aktif = 1: is_aktif = 0;
+            var url = "{{ route('pengaturan.hari-libur.update', ':id') }}";
+            url = url.replace(':id', id);
+            $.ajax({
+                type: "PATCH",
+                url: url,
+                data: {
+                    id: id,
+                    is_aktif: is_aktif
+                },
+                success: function(res) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses',
+                        text: 'Status berhasil diperbarui!',
+                        willClose: () => {
+                            reinitTable()
+                        }
+                    })
+                }
+            })
         }
 
         function deleteData(id) {
+            var url = "{{ route('pengaturan.hari-libur.destroy', ':id') }}";
+            url = url.replace(':id', id);
             Swal.fire({
                 title: 'Konfirmasi',
                 text: "Apakah anda yakin ingin menghapus?",
@@ -160,7 +230,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: "{{ route('pengaturan.hari-libur.destroy', 1) }}",
+                        url: url,
                         success: function(res) {
                             Swal.fire({
                                 icon: 'success',
@@ -171,36 +241,9 @@
                                 }
                             })
                         }
-                    });
+                    })
                 }
             })
         }
-
-        $('#form').submit(function(e) {
-            e.preventDefault()
-            let form = new FormData(this)
-            $.ajax({
-                url: "{{ route('pengaturan.hari-libur.store') }}",
-                type: "POST",
-                data: form,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(data) {
-                    $('#myModal').modal('hide');
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Sukses',
-                        text: 'Data berhasil disimpan!',
-                        willClose: () => {
-                            reinitTable()
-                        }
-                    })
-                },
-                error: function(request, msg, error) {
-                    console.log(msg)
-                }
-            });
-        });
     </script>
 @endpush

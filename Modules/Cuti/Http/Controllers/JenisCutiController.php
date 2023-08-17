@@ -3,7 +3,6 @@
 namespace Modules\Cuti\Http\Controllers;
 
 use App\Models\JenisCuti;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Yajra\DataTables\DataTables;

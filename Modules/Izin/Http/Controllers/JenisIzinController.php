@@ -3,7 +3,6 @@
 namespace Modules\Izin\Http\Controllers;
 
 use App\Models\JenisIzin;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Yajra\DataTables\DataTables;
