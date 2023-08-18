@@ -46,8 +46,26 @@ class CutiController extends Controller
                         case "1":
                             return "<span class='badge bg-success'>disetujui</span>";
                             break;
-                        default:
+                        case "2":
                             return '<span class="badge bg-danger">ditolak</span><br><span><a href="javascript:void(0)" onclick="detailPenolakan(\'' . $row->alasan_penolakan . '\')"><u>lihat alasan</u></a></span>';
+                            break;
+                        default:
+                            return "<span class='badge bg-danger'>tidak diketahui</span>";
+                    }
+                })
+                ->addColumn('status_export', function ($row) {
+                    switch ($row->status) {
+                        case "0":
+                            return "menunggu persetujuan";
+                            break;
+                        case "1":
+                            return "disetujui";
+                            break;
+                        case "2":
+                            return "ditolak";
+                            break;
+                        default:
+                            return 'tidak diketahui';
                     }
                 })
                 ->rawColumns(['bukti_foto', 'status', 'aksi'])

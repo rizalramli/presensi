@@ -62,6 +62,15 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12 mt-3">
+                            <div class="form-group">
+                                <button id="unduh-excel" class="btn btn-success"><i
+                                        class="bi bi-file-earmark-arrow-down"></i>
+                                    Unduh Excel</button>
+                                <button id="unduh-pdf" class="btn btn-danger"><i class="bi bi-file-earmark-arrow-down"></i>
+                                    Unduh PDF</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,6 +82,7 @@
                         <table class="table" id="dataTable" width="100%">
                             <thead>
                                 <tr>
+                                    <th class="d-none">Nomor</th>
                                     <th width="20%">Nama</th>
                                     <th width="15%">Jenis Cuti</th>
                                     <th width="10%">Dari Tanggal</th>
@@ -80,6 +90,7 @@
                                     <th width="10%">Jumlah</th>
                                     <th width="10%">Berkas</th>
                                     <th width="15%">Status</th>
+                                    <th class="none">Status</th>
                                     <th width="5%">Aksi</th>
                                 </tr>
                             </thead>
@@ -164,6 +175,12 @@
     <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
     <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="{{ asset('assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
     <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -193,7 +210,18 @@
                             d.guru = $('#filter-guru').val()
                     }
                 },
+                columnDefs: [{
+                    "targets": 0,
+                    "render": function(data, type, row, meta) {
+                        return meta.row + 1
+                    }
+                }],
                 columns: [{
+                        data: 'nomor',
+                        name: 'nomor',
+                        visible: false
+                    },
+                    {
                         data: 'nama',
                         name: 'nama'
                     },
@@ -222,12 +250,65 @@
                         name: 'status'
                     },
                     {
+                        data: 'status_export',
+                        name: 'status_export',
+                        visible: false
+                    },
+                    {
                         data: 'aksi',
                         name: 'aksi'
                     }
                 ],
+                dom: 'Blfrtip',
+                buttons: [{
+                        extend: 'excelHtml5',
+                        text: 'excel',
+                        title: function() {
+                            let bulan = $("#filter-bulan").find(":selected").text()
+                            let tahun = $("#filter-tahun").find(":selected").text()
+                            return 'Daftar Cuti ' + $.trim(bulan) + ' ' + $.trim(tahun)
+                        },
+                        filename: function() {
+                            let bulan = $("#filter-bulan").find(":selected").text()
+                            let tahun = $("#filter-tahun").find(":selected").text()
+                            return 'Daftar Cuti ' + $.trim(bulan) + ' ' + $.trim(tahun)
+                        },
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 8]
+                        },
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'pdf',
+                        orientation: 'potrait',
+                        title: function() {
+                            let bulan = $("#filter-bulan").find(":selected").text()
+                            let tahun = $("#filter-tahun").find(":selected").text()
+                            return 'Daftar Cuti ' + $.trim(bulan) + ' ' + $.trim(tahun)
+                        },
+                        filename: function() {
+                            let bulan = $("#filter-bulan").find(":selected").text()
+                            let tahun = $("#filter-tahun").find(":selected").text()
+                            return 'Daftar Cuti ' + $.trim(bulan) + ' ' + $.trim(tahun)
+                        },
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 8]
+                        },
+                    }
+                ],
+                drawCallback: function(settings) {
+                    $('.dt-buttons').hide()
+                }
             });
         }
+
+        $('#unduh-excel').click(function(e) {
+            $('#dataTable_wrapper .dt-buttons .buttons-excel').click()
+        })
+
+        $('#unduh-pdf').click(function(e) {
+            $('#dataTable_wrapper .dt-buttons .buttons-pdf').click();
+        });
 
         function reinitTable() {
             $('#dataTable').DataTable().clear().destroy()
