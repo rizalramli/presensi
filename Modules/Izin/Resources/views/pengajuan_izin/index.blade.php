@@ -97,7 +97,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="input-jenis-izin">Jenis Izin</label>
-                                    <select class="choices form-select" name="id_jenis_izin" id="input-jenis-izin">
+                                    <select class="choices form-select" name="id_jenis_izin" id="input-jenis-izin" required>
                                         @foreach ($daftar_jenis_izin as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->nama }}
@@ -108,9 +108,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="input-kuota">Bukti Foto</label>
-                                    <input type="file" name="bukti_foto" class="form-control" accept=".jpg, .jpeg, .png"
-                                        required>
+                                    <label for="input-bukti-foto">Bukti Foto</label>
+                                    <input type="file" id="input-bukti-foto" name="bukti_foto" class="form-control"
+                                        accept=".jpg, .jpeg, .png" required>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -147,7 +147,7 @@
                             <div class="form-group">
                                 <label for="input-kuota">Foto</label>
                                 <div class="text-center">
-                                    <img id="input-bukti-foto" width="100%" src="" class="rounded"
+                                    <img id="input-bukti-foto-berkas" width="100%" src="" class="rounded"
                                         alt="...">
                                 </div>
                             </div>
@@ -300,7 +300,7 @@
         function detailBerkas(bukti_foto, keterangan) {
             $('#myModalBerkas').modal('show')
             let url = "{{ asset('assets/images/izin') }}" + '/' + bukti_foto
-            $("#input-bukti-foto").attr("src", url)
+            $("#input-bukti-foto-berkas").attr("src", url)
             $('#input-keterangan-berkas').val(keterangan)
         }
 

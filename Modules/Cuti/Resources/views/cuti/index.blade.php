@@ -156,7 +156,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="input-keterangan-penolakan">Keterangan</label>
-                                    <textarea id="input-keterangan-penolakan" name="keterangan" class="form-control" rows="3" required></textarea>
+                                    <textarea id="input-keterangan-penolakan" name="keterangan" class="form-control" rows="3" readonly></textarea>
                                 </div>
                             </div>
                         </div>
