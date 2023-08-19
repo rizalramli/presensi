@@ -156,34 +156,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Detail Berkas --}}
-    <div class="modal fade text-left" id="myModalPenolakan" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel1">Alasan Penolakan</h5>
-                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="input-keterangan-penolakan">Keterangan</label>
-                                <textarea id="input-keterangan-penolakan" name="keterangan_penolakan" class="form-control" rows="3" readonly></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('custom-script')
@@ -253,19 +225,6 @@
 
         function createCard(id, nama, tanggal, dari_jam, sampai_jam, jenis_izin, status, bukti_foto, keterangan,
             alasan_penolakan) {
-            let keterangan_status;
-            let keterangan_penolakan = ``;
-            if (status == 0) {
-                keterangan_status = `<button class="btn btn-sm btn-warning">Menunggu Persetujuan</button>`;
-            } else if (status == 1) {
-                keterangan_status = `<button class="btn btn-sm btn-success">Disetujui</button>`;
-            } else if (status == 2) {
-                keterangan_status = `<button class="btn btn-sm btn-danger">Ditolak</button>`;
-                keterangan_penolakan =
-                    `<span><a href="javascript:void(0)" onclick="detailPenolakan('${alasan_penolakan}')"><u> | alasan ditolak</u></a></span>`;
-            } else {
-                keterangan_status = `<button class="btn btn-sm btn-danger">Tidak Diketahui</button>`;
-            }
             return `
             <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="card">
@@ -293,11 +252,6 @@
             let url = "{{ asset('assets/images/izin') }}" + '/' + bukti_foto
             $("#input-bukti-foto-berkas").attr("src", url)
             $('#input-keterangan-berkas').val(keterangan)
-        }
-
-        function detailPenolakan(keterangan) {
-            $('#myModalPenolakan').modal('show')
-            $('#input-keterangan-penolakan').val(keterangan)
         }
 
         function detailKonfirmasi(id) {

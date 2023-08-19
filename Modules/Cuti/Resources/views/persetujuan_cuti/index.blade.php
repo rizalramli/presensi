@@ -28,7 +28,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="filter-bulan">Bulan</label>
-                                <select id="filter-bulan" class="choices form-select" onchange="reinitTable()">
+                                <select id="filter-bulan" class="choices form-select" onchange="loadData()">
                                     @for ($i = 1; $i <= 12; $i++)
                                         <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>
                                             {{ $daftar_bulan[$i] }}</option>
@@ -39,7 +39,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="filter-tahun">Tahun</label>
-                                <select id="filter-tahun" class="choices form-select" onchange="reinitTable()">
+                                <select id="filter-tahun" class="choices form-select" onchange="loadData()">
                                     @for ($i = date('Y', strtotime('-2 year')); $i <= date('Y'); $i++)
                                         <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
                                             {{ $i }}</option>
@@ -50,10 +50,10 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="filter-guru">Nama Guru</label>
-                                <select id="filter-guru" class="choices form-select" onchange="reinitTable()">
+                                <select id="filter-guru" class="choices form-select" onchange="loadData()">
                                     <option value="">Semua Guru</option>
                                     @foreach ($daftar_guru as $item)
-                                        <option value="{{ $item->id_guru }}">
+                                        <option value="{{ $item->id }}">
                                             {{ $item->nama }}
                                         </option>
                                     @endforeach
@@ -64,87 +64,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="card">
-                        <div class="card-header fw-bold text-center">
-                            Rizal Ramli
-                        </div>
-                        <div class="card-body">
-                            <p class="text-muted">01/08/2023 - 02/08/2023</p>
-                            <p class="text-muted">2 hari</p>
-                            <p class="text-muted"><span class="badge bg-primary">Sakit</span></p>
-                            <p class="text-muted"><a href="#" data-bs-toggle="modal"
-                                    data-bs-target="#myModalBerkas"><u>lihat berkas</u></a></p>
-                            <p class="text-center">
-                                <button data-bs-toggle="modal" data-bs-target="#myModalKonfirmasi"
-                                    class="btn btn-sm btn-success">Konfirmasi</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="card">
-                        <div class="card-header fw-bold text-center">
-                            Hasri Wiji
-                        </div>
-                        <div class="card-body">
-                            <p class="text-muted">01/07/2023 - 01/10/2023</p>
-                            <p class="text-muted">90 hari</p>
-                            <p class="text-muted"><span class="badge bg-primary">Melahirkan</span></p>
-                            <p class="text-muted"><a href="#" data-bs-toggle="modal"
-                                    data-bs-target="#myModalBerkas"><u>lihat berkas</u></a></p>
-                            <p class="text-center">
-                                <button data-bs-toggle="modal" data-bs-target="#myModalKonfirmasi"
-                                    class="btn btn-sm btn-success">Konfirmasi</button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <div id="card-container" class="row"></div>
             </div>
 
         </section>
         <!-- Basic Tables end -->
     </div>
-
-    {{-- modal berkas --}}
-    <form id="form" class="form" enctype="multipart/form-data">
-        <div class="modal fade text-left" id="myModalBerkas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel1">Berkas</h5>
-                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mb-2">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="input-kuota">Foto</label>
-                                    <div class="text-center">
-                                        <img width="100%"
-                                            src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Contour_buffer_strips_NRCS.jpg"
-                                            class="rounded" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="input-keterangan">Keterangan</label>
-                                    <textarea name="" id="input-keterangan" name="keterangan" class="form-control" rows="3">Sudah sakit sejak dulu</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 
     {{-- modal konfirmas --}}
     <form id="form" class="form" enctype="multipart/form-data">
@@ -164,14 +89,15 @@
                                 <div class="form-group">
                                     <label for="input-nama">Status</label>
                                     <br>
+                                    <input type="hidden" id="input-id" name="id">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
+                                        <input name="status" class="form-check-input" type="radio"
+                                            name="inlineRadioOptions" id="inlineRadio1" value="1" required>
                                         <label class="form-check-label" for="inlineRadio1">Setujui</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
+                                        <input name="status" class="form-check-input" type="radio"
+                                            name="inlineRadioOptions" id="inlineRadio2" value="2" required>
                                         <label class="form-check-label" for="inlineRadio2">Tolak</label>
                                     </div>
                                 </div>
@@ -179,7 +105,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="input-keterangan">Keterangan Penolakan</label>
-                                    <textarea name="" id="input-keterangan" name="keterangan" class="form-control" rows="3">ada tugas yang perlu diselesaikan</textarea>
+                                    <textarea name="alasan_penolakan" id="input-keterangan" class="form-control" rows="3"></textarea>
                                     <small class="text-danger">* isi keterangan jika cuti ditolak</small>
                                 </div>
                             </div>
@@ -193,6 +119,42 @@
             </div>
         </div>
     </form>
+    {{-- Detail Berkas --}}
+    <div class="modal fade text-left" id="myModalBerkas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel1">Berkas</h5>
+                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="input-kuota">Foto</label>
+                                <div class="text-center">
+                                    <img id="input-bukti-foto-berkas" width="100%" src="" class="rounded"
+                                        alt="...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="input-keterangan-berkas">Keterangan</label>
+                                <textarea id="input-keterangan-berkas" name="keterangan_berkas" class="form-control" rows="3" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('custom-script')
@@ -203,6 +165,7 @@
     <script>
         $(document).ready(function() {
             ajaxSetup()
+            loadData()
         });
 
         function ajaxSetup() {
@@ -213,68 +176,135 @@
             });
         }
 
-        function editData(id) {
-            $('#myModal').modal('show');
-            $('#input-nama').val('Tahunan');
-            $('#input-kuota').val('12');
+        function loadData() {
+            let bulan = $('#filter-bulan').val()
+            let tahun = $('#filter-tahun').val()
+            let id_user = $('#filter-guru').val()
+            $.ajax({
+                url: "{{ route('cuti.persetujuan-cuti.index') }}",
+                method: "GET",
+                dataType: "json",
+                data: {
+                    bulan: bulan,
+                    tahun: tahun,
+                    id_user: id_user,
+                },
+                success: function(data) {
+                    populateCardContainer(data);
+                },
+                error: function() {
+                    console.log("Error fetching data.")
+                }
+            });
         }
 
-        function deleteData(id) {
-            Swal.fire({
-                title: 'Konfirmasi',
-                text: "Apakah anda yakin ingin menghapus?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, saya yakin!',
-                cancelButtonText: "Batal",
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: "{{ route('cuti.jenis-cuti.destroy', 1) }}",
-                        success: function(res) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sukses',
-                                text: 'Data berhasil dihapus!',
-                                willClose: () => {
-                                    reinitTable()
-                                }
-                            })
-                        }
-                    });
-                }
-            })
+        function populateCardContainer(data) {
+            const cardContainer = $("#card-container");
+            cardContainer.empty();
+            if (data.length === 0) {
+                const noDataCard = `
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Belum Ada Pengajuan Cuti</h5>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cardContainer.append(noDataCard);
+            } else {
+                data.forEach(item => {
+                    const card = createCard(item.id, item.nama, item.dari_tanggal, item.sampai_tanggal, item
+                        .lama_hari, item
+                        .jenis_cuti,
+                        item.status, item.bukti_foto, item.keterangan, item.alasan_penolakan);
+                    cardContainer.append(card);
+                });
+            }
+        }
+
+        function createCard(id, nama, dari_tanggal, sampai_tanggal, lama_hari, jenis_cuti, status, bukti_foto, keterangan,
+            alasan_penolakan) {
+            return `
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-header fw-bold text-center">
+                            ${nama}
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">${formatDateToDMY(dari_tanggal)} - ${formatDateToDMY(sampai_tanggal)}</p>
+                            <p class="text-muted fw-bold">${lama_hari} Hari</p>
+                            <p class="text-muted"><span class="badge bg-primary">${jenis_cuti}</span></p>
+                            <p class="text-muted">
+                                <span><a href="javascript:void(0)" onclick="detailBerkas('${bukti_foto}','${keterangan}')"><u>lihat berkas</u></a></span>
+                            </p>
+                            <p class="text-center">
+                                <span><a class="btn btn-sm btn-success" href="javascript:void(0)" onclick="detailKonfirmasi('${id}')">Konfirmasi</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        `;
+        }
+
+        function detailBerkas(bukti_foto, keterangan) {
+            $('#myModalBerkas').modal('show')
+            let url = "{{ asset('assets/images/cuti') }}" + '/' + bukti_foto
+            $("#input-bukti-foto-berkas").attr("src", url)
+            $('#input-keterangan-berkas').val(keterangan)
+        }
+
+        function detailKonfirmasi(id) {
+            $('#myModalKonfirmasi').modal('show')
+            $('#input-id').val(id)
         }
 
         $('#form').submit(function(e) {
             e.preventDefault()
             let form = new FormData(this)
             $.ajax({
-                url: "{{ route('cuti.jenis-cuti.store') }}",
+                url: "{{ route('cuti.persetujuan-cuti.store') }}",
                 type: "POST",
                 data: form,
                 contentType: false,
                 cache: false,
                 processData: false,
                 success: function(data) {
-                    $('#myModal').modal('hide');
+                    $('#myModalKonfirmasi').modal('hide')
+                    $('#form').trigger("reset")
                     Swal.fire({
                         icon: 'success',
                         title: 'Sukses',
-                        text: 'Data berhasil disimpan!',
+                        text: 'Sukses melakukan persetujuan cuti!',
                         willClose: () => {
-                            reinitTable()
+                            loadData()
                         }
                     })
                 },
                 error: function(request, msg, error) {
+                    $('#myModalKonfirmasi').modal('hide')
+                    $('#form').trigger("reset")
                     console.log(msg)
                 }
-            });
-        });
+            })
+        })
+
+        function formatDateToDMY(dateString) {
+            var date = new Date(dateString);
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1; // Months are zero-indexed
+            var year = date.getFullYear();
+
+            // Add leading zero if day or month is a single digit
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+
+            return day + '/' + month + '/' + year;
+        }
     </script>
 @endpush
