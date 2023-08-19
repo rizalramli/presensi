@@ -72,12 +72,6 @@
                         <span>Daftar Absensi</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('absensi/laporan-absensi2') ? 'active' : '' }}">
-                    <a href="{{ route('absensi.laporan-absensi2') }}" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-check"></i>
-                        <span>Laporan Absensi</span>
-                    </a>
-                </li>
 
                 <li class="sidebar-title">Izin</li>
                 <li class="sidebar-item {{ Request::is('izin/daftar-izin') ? 'active' : '' }}">
