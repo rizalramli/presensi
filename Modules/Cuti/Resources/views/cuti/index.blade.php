@@ -128,7 +128,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="input-keterangan">Keterangan</label>
-                                    <textarea id="input-keterangan" name="keterangan" class="form-control" rows="3"></textarea>
+                                    <textarea id="input-keterangan" name="keterangan" class="form-control" rows="3" readonly></textarea>
                                 </div>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="input-keterangan-penolakan">Keterangan</label>
-                                    <textarea id="input-keterangan-penolakan" name="keterangan" class="form-control" rows="3"></textarea>
+                                    <textarea id="input-keterangan-penolakan" name="keterangan" class="form-control" rows="3" required></textarea>
                                 </div>
                             </div>
                         </div>

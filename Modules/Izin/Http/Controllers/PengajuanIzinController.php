@@ -2,79 +2,40 @@
 
 namespace Modules\Izin\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use App\Models\PengajuanIzin;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PengajuanIzinController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
     public function index()
     {
         $daftar_bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-        return view('izin::pengajuan_izin.index', compact('daftar_bulan'));
+        $daftar_jenis_izin = PengajuanIzin::getDataJenisIzin();
+        if (request()->ajax()) {
+            $bulan = request()->bulan;
+            $tahun = request()->tahun;
+            $id_user = Auth::id();
+            $data = PengajuanIzin::getData($bulan, $tahun, $id_user);
+            return response()->json($data);
+        }
+        return view('izin::pengajuan_izin.index', compact('daftar_bulan', 'daftar_jenis_izin'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function store()
     {
-        return view('cuti::create');
-    }
+        if (request()->file('bukti_foto')) {
+            $file = request()->file('bukti_foto');
+            $file_name = 'izin-' . time() . '.' . $file->extension();
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            request()->file('bukti_foto')->move('assets/images/izin', $file_name);
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('cuti::show');
-    }
+            request()->bukti_foto = $file_name;
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('cuti::edit');
-    }
+        request()->id_user = Auth::id();
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $data = PengajuanIzin::simpanData(request());
+        return Response()->json($data);
     }
 }
