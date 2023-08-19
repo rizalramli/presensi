@@ -66,8 +66,8 @@
                         <span>Home</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ Request::is('absensi') ? 'active' : '' }}">
-                    <a href="{{ route('absensi.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('absensi/daftar-absensi') ? 'active' : '' }}">
+                    <a href="{{ route('absensi.daftar-absensi.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-bounding-box"></i>
                         <span>Daftar Absensi</span>
                     </a>

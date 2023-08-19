@@ -18,7 +18,7 @@ use Modules\Absensi\Http\Controllers\PulangAbsensiController;
 
 Route::prefix('absensi')->name('absensi.')->group(function () {
     Route::resources([
-        '/' => AbsensiController::class,
+        'daftar-absensi' => AbsensiController::class,
         'masuk-absensi' => MasukAbsensiController::class,
         'pulang-absensi' => PulangAbsensiController::class,
         'laporan-absensi' => LaporanAbsensiController::class,

@@ -79,19 +79,19 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table" id="dataTable" width="100%">
+                        <table class="table table-bordered" id="dataTable" width="100%">
                             <thead>
                                 <tr>
                                     <th class="d-none">Nomor</th>
-                                    <th width="20%">Nama</th>
-                                    <th width="15%">Jenis Cuti</th>
-                                    <th width="10%">Dari Tanggal</th>
-                                    <th width="10%">Sampai Tanggal</th>
-                                    <th width="10%">Jumlah</th>
-                                    <th width="10%">Berkas</th>
-                                    <th width="15%">Status</th>
+                                    <th class="text-center" width="20%">Nama</th>
+                                    <th class="text-center" width="15%">Jenis Cuti</th>
+                                    <th class="text-center" width="10%">Dari Tanggal</th>
+                                    <th class="text-center" width="10%">Sampai Tanggal</th>
+                                    <th class="text-center" width="10%">Jumlah</th>
+                                    <th class="text-center" width="10%">Berkas</th>
+                                    <th class="text-center" width="15%">Status</th>
                                     <th class="none">Status</th>
-                                    <th width="5%">Aksi</th>
+                                    <th class="text-center" width="5%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -231,23 +231,28 @@
                     },
                     {
                         data: 'dari_tanggal',
-                        name: 'dari_tanggal'
+                        name: 'dari_tanggal',
+                        className: 'text-center'
                     },
                     {
                         data: 'sampai_tanggal',
-                        name: 'sampai_tanggal'
+                        name: 'sampai_tanggal',
+                        className: 'text-center'
                     },
                     {
                         data: 'lama_hari',
-                        name: 'lama_hari'
+                        name: 'lama_hari',
+                        className: 'text-center'
                     },
                     {
                         data: 'bukti_foto',
-                        name: 'bukti_foto'
+                        name: 'bukti_foto',
+                        className: 'text-center'
                     },
                     {
                         data: 'status',
-                        name: 'status'
+                        name: 'status',
+                        className: 'text-center'
                     },
                     {
                         data: 'status_export',
@@ -256,7 +261,8 @@
                     },
                     {
                         data: 'aksi',
-                        name: 'aksi'
+                        name: 'aksi',
+                        className: 'text-center'
                     }
                 ],
                 dom: 'Blfrtip',
