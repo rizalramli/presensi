@@ -93,4 +93,26 @@ class Absensi extends Model
 
         return $sql;
     }
+
+    public static function getDataAbsensiHariIni($id_user, $tanggal)
+    {
+        $sql = "
+        SELECT 
+            a.jam_masuk,
+            a.jam_pulang
+        FROM absensi a
+        WHERE 
+            a.deleted_at IS NULL
+        AND 
+            a.id_user = :id_user
+        AND 
+            a.tanggal = :tanggal";
+
+        $result = DB::selectOne($sql, [
+            'id_user' => $id_user,
+            'tanggal' => $tanggal
+        ]);
+
+        return $result;
+    }
 }

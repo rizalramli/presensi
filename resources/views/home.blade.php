@@ -24,11 +24,12 @@
                             <tr>
                                 <td width="10%">
                                     <div class="logo me-3"><img width="50px" height="50px"
-                                            src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" srcset="">
+                                            src="{{ asset('assets/images/logo/' . $instansi->logo) }}" alt="Logo"
+                                            srcset="">
                                     </div>
                                 </td>
                                 <td>
-                                    <span><small>MA MIFTAHUL ULUM PANDANWANGI</small></span>
+                                    <span><small>{{ $instansi->nama_sekolah }}</small></span>
                                 </td>
                             </tr>
                         </table>
@@ -43,8 +44,8 @@
                                     <img src="{{ asset('assets/images/faces/2.jpg') }}" alt="" srcset="" />
                                 </div>
                             </td>
-                            <td colspan="1"><span class="fw-bold fs-6">Rizal Ramli</span></td>
-                            <td rowspan="2" class="text-right"><span class="fw-bold"> <a href="#"
+                            <td colspan="1"><span class="fw-bold fs-6">{{ Auth::user()->name }}</span></td>
+                            <td rowspan="2" class="text-right"><span class="fw-bold"> <a href="javascript:void(0)"
                                         class='sidebar-link' data-bs-toggle="modal" data-bs-target="#border-less"><i
                                             class="bi bi-box-arrow-right h3"></i></a></span>
                             </td>
@@ -56,7 +57,9 @@
                     <hr>
                     <div class="row">
                         <div class="col-12 text-center">
-                            <span class="fw-bold fs-6 text-primary">12 Agustus 2023 08:00:11</span>
+                            <span class="fw-bold fs-6 text-primary">
+                                <div id="clock"></div>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -70,7 +73,7 @@
                             <span class="text-white fs-6">Masuk</span>
                             <div class="card mt-3">
                                 <div class="card-body">
-                                    <span class="fw-bold text-primary fs-5">08:00</span>
+                                    <span class="fw-bold text-primary fs-5">{{ $absensi->jam_masuk }}</span>
                                 </div>
                             </div>
                         </div>
@@ -78,12 +81,12 @@
                             <span class="text-white fs-6">Pulang</span>
                             <div class="card mt-3">
                                 <div class="card-body">
-                                    <span class="fw-bold text-primary fs-5">16:00</span>
+                                    <span class="fw-bold text-primary fs-5">{{ $absensi->jam_pulang }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 text-center">
-                            <span class="fw-bold text-white fs-6">Total Jam Kerja : 8 Jam 9 Menit</span>
+                            <span class="fw-bold text-white fs-6">Total Jam Kerja : {{ $absensi->total_jam_kerja }}</span>
                         </div>
                     </div>
                 </div>
@@ -235,5 +238,33 @@
                 }
             });
         }
+
+        function updateIndonesianTime() {
+            const months = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+
+            const days = [
+                "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"
+            ];
+
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const dayOfWeek = now.getDay();
+            const dayOfMonth = now.getDate();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const indonesianDateTime =
+                `${days[dayOfWeek]}, ${dayOfMonth} ${months[month]} ${year} ${hours}:${minutes}:${seconds}`;
+
+            $('#clock').text(indonesianDateTime);
+        }
+
+        // Memperbarui waktu setiap detik
+        setInterval(updateIndonesianTime, 1000);
     </script>
 @endpush
