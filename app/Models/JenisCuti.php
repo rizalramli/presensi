@@ -85,6 +85,7 @@ class JenisCuti extends Model
         $sql = DB::table('jenis_cuti')
             ->where('id', $id)
             ->update([
+                'is_aktif' => 0,
                 'deleted_at' => now()
             ]);
 

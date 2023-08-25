@@ -102,6 +102,12 @@
                 </li>
 
                 <li class="sidebar-title">Pengaturan</li>
+                <li class="sidebar-item {{ Request::is('pengaturan/daftar-user') ? 'active' : '' }}">
+                    <a href="{{ route('pengaturan.daftar-user.index') }}" class='sidebar-link'>
+                        <i class="bi bi-people"></i>
+                        <span>Daftar User</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ Request::is('pengaturan/hari-libur') ? 'active' : '' }}">
                     <a href="{{ route('pengaturan.hari-libur.index') }}" class='sidebar-link'>
                         <i class="bi bi-calendar3"></i>

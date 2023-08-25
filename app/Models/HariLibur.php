@@ -88,6 +88,7 @@ class HariLibur extends Model
         $sql = DB::table('hari_libur')
             ->where('id', $id)
             ->update([
+                'is_aktif' => 0,
                 'deleted_at' => now()
             ]);
 

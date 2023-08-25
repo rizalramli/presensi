@@ -40,9 +40,9 @@
                     <table width="100%">
                         <tr>
                             <td width="10%" rowspan="2">
-                                <div class="avatar avatar-xl me-3">
+                                {{-- <div class="avatar avatar-xl me-3">
                                     <img src="{{ asset('assets/images/faces/2.jpg') }}" alt="" srcset="" />
-                                </div>
+                                </div> --}}
                             </td>
                             <td colspan="1"><span class="fw-bold fs-6">{{ Auth::user()->name }}</span></td>
                             <td rowspan="2" class="text-right"><span class="fw-bold"> <a href="javascript:void(0)"
@@ -271,9 +271,9 @@
             const seconds = now.getSeconds();
 
             const indonesianDateTime =
-                `${days[dayOfWeek]}, ${dayOfMonth} ${months[month]} ${year} ${hours}:${minutes}:${seconds}`;
+                `${days[dayOfWeek]}, ${dayOfMonth} ${months[month]} ${year}\n${hours}:${minutes}:${seconds}`;
 
-            $('#clock').text(indonesianDateTime);
+            $('#clock').css('white-space', 'pre-line').text(indonesianDateTime);
         }
 
         // Memperbarui waktu setiap detik
