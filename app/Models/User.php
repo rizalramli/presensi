@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -42,4 +44,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function UbahPassword($request)
+    {
+        $user = auth()->user();
+        $oldPassword = $request->input('old_password');
+        $newPassword = $request->input('password');
+
+        if (!Hash::check($oldPassword, $user->password)) {
+            return response()->json(['status' => false, 'message' => 'Password lama anda salah']);
+        }
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['password' => Hash::make($newPassword)]);
+
+        return response()->json(['status' => true, 'message' => 'Password berhasil diperbarui']);
+    }
 }

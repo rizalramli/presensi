@@ -22,5 +22,6 @@ Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
         'instansi' => InstansiController::class,
         'lokasi' => LokasiController::class,
         'jam-kerja' => JamKerjaController::class,
+        'ubah-password' => UbahPasswordController::class,
     ]);
 });

@@ -179,6 +179,18 @@
                         </div>
                     </a>
                 </div>
+                <div class="col-6 text-center">
+                    <a href="{{ route('pengaturan.ubah-password.index') }}" class="text-primary">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="py-2">
+                                    <i class="bi bi-shield-lock h1"></i>
+                                </p>
+                                <p class="fw-bold">Ubah Password</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
