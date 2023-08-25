@@ -30,7 +30,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="filter-bulan">Bulan</label>
-                                <select id="filter-bulan" class="choices form-select" onchange="reinitTable()">
+                                <select id="filter-bulan" class="choices form-select" onchange="loadData()">
                                     @for ($i = 1; $i <= 12; $i++)
                                         <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>
                                             {{ $daftar_bulan[$i] }}</option>
@@ -41,7 +41,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="filter-tahun">Tahun</label>
-                                <select id="filter-tahun" class="choices form-select" onchange="reinitTable()">
+                                <select id="filter-tahun" class="choices form-select" onchange="loadData()">
                                     @for ($i = date('Y', strtotime('-2 year')); $i <= date('Y'); $i++)
                                         <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
                                             {{ $i }}</option>
@@ -56,12 +56,12 @@
                 <div class="card-header">
                 </div>
                 <div class="card-body">
-                    <p><span class="text-success me-4">&#10004; : Tepat Waktu</span></p>
-                    <p><span class="text-warning me-4">&#10004; : Terlambat Dengan Toleransi</span></p>
-                    <p><span class="text-danger me-4">&#10004; : Terlambat Tanpa Toleransi</span></p>
-                    <p><span class="me-4">&ndash; : Tidak Hadir</span></p>
+                    <p><b><span class="text-success me-4">&#10004; : Tepat Waktu</span></b></p>
+                    <p><b><span class="text-warning me-4">&#10004; : Terlambat Dengan Toleransi</span></b></p>
+                    <p><b><span class="text-danger me-4">&#10004; : Terlambat Tanpa Toleransi</span></b></p>
+                    <p><b><span class="me-4">&ndash; : Tidak Hadir</span></b></p>
                     <div class="table-responsive mt-3">
-                        <table class="table table-bordered" id="dataTable">
+                        <table class="table table-bordered" id="data-table">
                             <thead>
                                 <tr>
                                     <th class="text-center" rowspan="2" width="2%">No</th>
@@ -77,33 +77,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">01/08/2023</td>
-                                    <td class="text-center">Selasa</td>
-                                    <td class="text-center">07:19:59</td>
-                                    <td class="text-center">16:04:24</td>
-                                    <td class="text-center">08:44</td>
-                                    <td class="text-center"> <span class="text-success me-4">&#10004;</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">02/08/2023</td>
-                                    <td class="text-center">Rabu</td>
-                                    <td class="text-center">07:19:59</td>
-                                    <td class="text-center">16:04:24</td>
-                                    <td class="text-center">08:44</td>
-                                    <td class="text-center"><span class="text-warning me-4">&#10004;</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">03/08/2023</td>
-                                    <td class="text-center">Kamis</td>
-                                    <td class="text-center">07:19:59</td>
-                                    <td class="text-center">16:04:24</td>
-                                    <td class="text-center">08:44</td>
-                                    <td class="text-center"><span class="text-danger me-4">&#10004;</span></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -125,6 +98,7 @@
     <script>
         $(document).ready(function() {
             ajaxSetup()
+            loadData()
         });
 
         function ajaxSetup() {
@@ -133,6 +107,155 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+        }
+
+        function loadData() {
+            let bulan = $('#filter-bulan').val()
+            let tahun = $('#filter-tahun').val()
+            $.ajax({
+                url: "{{ route('absensi.laporan-absensi.index') }}",
+                method: "GET",
+                dataType: "json",
+                data: {
+                    bulan: bulan,
+                    tahun: tahun,
+                },
+                success: function(data) {
+                    populateCardContainer(data.tanggal, data.absensi, data.cuti, data.hari_libur_normal, data
+                        .hari_libur_nasional);
+                },
+                error: function() {
+                    console.log("Error fetching data.")
+                }
+            });
+        }
+
+        function populateCardContainer(tanggal, absensi, cuti, hari_libur_normal, hari_libur_nasional) {
+            var tableBody = $('#data-table tbody');
+            tableBody.empty();
+            tanggal.forEach((value, index) => {
+                let data = `<tr>
+                    <td class="text-center">${index + 1}</td>
+                    <td class="text-center">${formatDateToDMY(value)}</td>
+                    <td class="text-center">${getNameDay(value)}</td>`
+                const data_absensi = absensi.find(item => item.tanggal === value)
+                const data_cuti = cuti.find(item => value >= item.dari_tanggal && value <= item.sampai_tanggal)
+                const isLiburNormal = hari_libur_normal.some(item => item.hari === getNameDay(value))
+                const libur_nasional = hari_libur_nasional.find(item => item.tanggal === value)
+
+                if (data_absensi) {
+                    let jam_pulang = '-';
+                    let jumlah_jam_kerja = '-';
+                    let status_absensi;
+                    if (data_absensi.jam_pulang) {
+                        const timeDifference = calculateTimeDifference(data_absensi.jam_masuk, data_absensi
+                            .jam_pulang);
+                        jam_pulang = data_absensi.jam_pulang ? formatTimeToHHMM(data_absensi.jam_pulang) :
+                            '-';
+                        jumlah_jam_kerja = data_absensi.jam_pulang ? timeDifference.hours + ' jam ' +
+                            timeDifference.minutes + ' menit' :
+                            '-';
+                    }
+
+                    switch (data_absensi.status_absensi) {
+                        case 1:
+                            status_absensi = '<b><span class="text-success">&#10004;</span></b>';
+                            break;
+                        case 2:
+                            status_absensi = '<b><span class="text-warning">&#10004;</span></b>';
+                            break;
+                        case 3:
+                            status_absensi = '<b><span class="text-danger">&#10008;</span></b>';
+                            break;
+                        default:
+                            status_absensi = '<b><span class="text-dark">-</span></b>';
+                    }
+
+                    data +=
+                        `<td class="text-center">${formatTimeToHHMM(data_absensi.jam_masuk)}</td>
+                        <td class="text-center">${jam_pulang}</td>
+                        <td class="text-center">${jumlah_jam_kerja}</td>
+                        <td class="text-center">${status_absensi}</td>`
+                }
+
+                if (data_cuti) {
+                    if (value >= data_cuti.dari_tanggal && value <= data_cuti.sampai_tanggal) {
+                        data +=
+                            `<td colspan="4" class="bg-warning text-white text-center">${data_cuti.jenis_cuti}</td>`
+                    }
+                }
+
+                if (isLiburNormal) {
+                    data += `<td colspan="4" class="bg-secondary text-white text-center"></td>`
+                }
+
+                if (libur_nasional) {
+                    data += `<td colspan="4" class="bg-danger text-white text-center">${libur_nasional.nama}</td>`
+                }
+                data += `</tr>`
+                tableBody.append(data)
+            });
+        }
+
+        function formatDateToDMY(dateString) {
+            var date = new Date(dateString);
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1; // Months are zero-indexed
+            var year = date.getFullYear();
+
+            // Add leading zero if day or month is a single digit
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+
+            return day + '/' + month + '/' + year;
+        }
+
+        function getNameDay(dateString) {
+            const date = new Date(dateString);
+
+            const options = {
+                weekday: 'long',
+                timeZone: 'UTC'
+            }; // 'long' gives the full day name
+            const formatter = new Intl.DateTimeFormat('id-ID', options);
+
+            const dayName = formatter.format(date);
+
+            return dayName;
+        }
+
+        function formatTimeToHHMM(timeString) {
+            // Split the time string by colon
+            var parts = timeString.split(':');
+
+            // Get the hours and minutes
+            var hours = parts[0];
+            var minutes = parts[1];
+
+            return hours + ':' + minutes;
+        }
+
+        function calculateTimeDifference(startTime, endTime) {
+            const [startHours, startMinutes, startSeconds] = startTime.split(":").map(Number);
+            const [endHours, endMinutes, endSeconds] = endTime.split(":").map(Number);
+
+            const totalStartMinutes = startHours * 60 + startMinutes + startSeconds / 60;
+            const totalEndMinutes = endHours * 60 + endMinutes + endSeconds / 60;
+
+            const timeDifference = totalEndMinutes - totalStartMinutes;
+
+            const hours = Math.floor(timeDifference / 60);
+            const minutes = Math.floor(timeDifference % 60);
+
+            return {
+                hours,
+                minutes
+            };
         }
     </script>
 @endpush

@@ -85,10 +85,10 @@
                 <div class="card-header">
                 </div>
                 <div class="card-body">
-                    <p><span class="text-success me-4">&#10004; : Tepat Waktu</span></p>
-                    <p><span class="text-warning me-4">&#10004; : Terlambat Dengan Toleransi</span></p>
-                    <p><span class="text-danger me-4">&#10004; : Terlambat Tanpa Toleransi</span></p>
-                    <p><span class="me-4">&ndash; : Tidak Hadir</span></p>
+                    <p><b><span class="text-success me-4">&#10004; : Tepat Waktu</span></b></p>
+                    <p><b><span class="text-warning me-4">&#10004; : Terlambat Dengan Toleransi</span></b></p>
+                    <p><b><span class="text-danger me-4">&#10004; : Terlambat Tanpa Toleransi</span></b></p>
+                    <p><b><span class="me-4">&ndash; : Tidak Hadir</span></b></p>
                     <div class="table-responsive mt-3">
                         <table class="table table-bordered" id="dataTable" width="100%">
                             <thead>

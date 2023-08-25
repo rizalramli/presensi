@@ -2,79 +2,44 @@
 
 namespace Modules\Absensi\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use App\Models\LaporanAbsensi;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanAbsensiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+
     public function index()
     {
         $daftar_bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        if (request()->ajax()) {
+            $bulan = request()->bulan;
+            $tahun = request()->tahun;
+            $id_guru = Auth::id();
+
+            $absensi = LaporanAbsensi::getData($bulan, $tahun, $id_guru);
+            $cuti = LaporanAbsensi::getDataCuti($bulan, $tahun, $id_guru);
+            $hari_libur_normal = LaporanAbsensi::getDataLiburNormal();
+            $hari_libur_nasional = LaporanAbsensi::getDataLiburNasional($bulan, $tahun);
+
+            $tanggalAwal = strtotime("$tahun-$bulan-01");
+            $tanggalAkhir = strtotime("last day of $tahun-$bulan");
+
+            $date = array();
+
+            while ($tanggalAwal <= $tanggalAkhir) {
+                $date[] = date('Y-m-d', $tanggalAwal);
+                $tanggalAwal = strtotime('+1 day', $tanggalAwal);
+            }
+
+            return response()->json([
+                'tanggal' => $date,
+                'absensi' => $absensi,
+                'cuti' => $cuti,
+                'hari_libur_normal' => $hari_libur_normal,
+                'hari_libur_nasional' => $hari_libur_nasional
+            ]);
+        }
         return view('absensi::laporan_absensi.index', compact('daftar_bulan'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('absensi::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('absensi::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('absensi::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

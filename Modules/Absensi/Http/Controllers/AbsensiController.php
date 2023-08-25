@@ -97,16 +97,16 @@ class AbsensiController extends Controller
                 ->editColumn('status_absensi', function ($row) {
                     switch ($row->status_absensi) {
                         case "1":
-                            return '<span class="text-success">&#10004;</span>';
+                            return '<b><span class="text-success">&#10004;</span></b>';
                             break;
                         case "2":
-                            return '<span class="text-warning">&#10004;</span>';
+                            return '<b><span class="text-warning">&#10004;</span></b>';
                             break;
                         case "2":
-                            return '<span class="text-danger">&#10004;</span>';
+                            return '<b><span class="text-danger">&#10004;</span></b>';
                             break;
                         default:
-                            return '<span class="text-dark">-</span>';
+                            return '<b><span class="text-dark">-</span></b>';
                     }
                 })
                 ->addColumn('jam_masuk_export', function ($row) {
