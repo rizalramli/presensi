@@ -4,7 +4,6 @@ namespace Modules\Pengaturan\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class UbahPasswordController extends Controller
 {

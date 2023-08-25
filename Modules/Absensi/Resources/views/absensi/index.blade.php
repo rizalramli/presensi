@@ -69,7 +69,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-12 mt-3">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
                             <div class="form-group">
                                 <button id="unduh-excel" class="btn btn-success"><i
                                         class="bi bi-file-earmark-arrow-down"></i>
