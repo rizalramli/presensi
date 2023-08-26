@@ -158,4 +158,15 @@ class User extends Authenticatable
 
         return response()->json(['status' => true, 'message' => 'Password berhasil diperbarui']);
     }
+
+    public static function UbahPasswordAdmin($request)
+    {
+        $newPassword = $request->input('password');
+
+        DB::table('users')
+            ->where('id', $request->id_user)
+            ->update(['password' => Hash::make($newPassword)]);
+
+        return response()->json(['status' => true, 'message' => 'Password berhasil diperbarui']);
+    }
 }

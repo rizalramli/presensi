@@ -20,6 +20,7 @@ class DaftarUserController extends Controller
             return DataTables::of($data)
                 ->addColumn('aksi', function ($row) {
                     $aksi = '';
+                    $aksi .= '<span class="badge bg-primary me-1"><a href="javascript:void(0)" onclick="ubahPassword(' . $row->id . ')" class="text-white">ubah password</a></span>';
                     $aksi .= '<span class="badge bg-warning me-1"><a href="javascript:void(0)" onclick="editData(' . $row->id . ')" class="text-white">edit</a></span>';
                     $aksi .= '<span class="badge bg-danger"><a href="javascript:void(0)" onclick="deleteData(' . $row->id . ')" class="text-white">hapus</a></span>';
                     return $aksi;
@@ -56,5 +57,11 @@ class DaftarUserController extends Controller
     {
         $data = User::deleteData($id);
         return Response()->json($data);
+    }
+
+    public function ubah_password_admin()
+    {
+        $data = User::UbahPasswordAdmin(request());
+        return $data;
     }
 }

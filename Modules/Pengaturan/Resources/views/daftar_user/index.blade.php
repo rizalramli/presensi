@@ -100,6 +100,44 @@
             </div>
         </div>
     </form>
+
+    <form id="form-ubah-password" class="form" enctype="multipart/form-data">
+        <div class="modal fade text-left" id="myModalUbahPassword" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel1">Ubah Password</h5>
+                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="password">Password Baru</label>
+                                    <input type="hidden" name="id_user" id="input-id-password">
+                                    <input type="password" id="password" name="password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="konfirmasi-password">Konfirmasi Password</label>
+                                    <input type="password" id="konfirmasi-password" name="konfirmasi_password"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary ml-1">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 @endsection
 
 @push('custom-script')
@@ -207,6 +245,11 @@
             })
         }
 
+        function ubahPassword(id) {
+            $('#myModalUbahPassword').modal('show')
+            $('#input-id-password').val(id)
+        }
+
         function updateData(id) {
             var isChecked = $("#checkbox" + id).prop("checked");
             var is_aktif;
@@ -266,5 +309,55 @@
                 }
             })
         }
+
+        $('#form-ubah-password').submit(function(e) {
+            e.preventDefault()
+            let form = new FormData(this)
+            let password = $('#password').val()
+            let konfirmasi_password = $('#konfirmasi-password').val()
+            if (password != konfirmasi_password) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Password dan konfirmasi password harus sama!'
+                })
+            } else {
+                $.ajax({
+                    url: "{{ route('pengaturan.ubah-password-admin') }}",
+                    type: "POST",
+                    data: form,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+                        $('#myModalUbahPassword').modal('hide')
+                        if (data.status === true) {
+                            $('#form-ubah-password').trigger("reset")
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses',
+                                text: data.message,
+                                willClose: () => {
+                                    reinitTable()
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Peringatan',
+                                text: data.message,
+                                willClose: () => {
+                                    reinitTable()
+                                }
+                            })
+                        }
+                    },
+                    error: function(request, msg, error) {
+                        $('#form-ubah-password').trigger("reset")
+                        console.log(msg)
+                    }
+                })
+            }
+        })
     </script>
 @endpush

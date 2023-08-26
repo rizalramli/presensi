@@ -26,6 +26,7 @@ Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
             'lokasi' => LokasiController::class,
             'jam-kerja' => JamKerjaController::class,
         ]);
+        Route::post('ubah-password-admin', [DaftarUserController::class, 'ubah_password_admin'])->name('ubah-password-admin');
     });
 
     Route::group(['middleware' => 'guru'], function () {

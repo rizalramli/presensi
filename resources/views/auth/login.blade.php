@@ -19,7 +19,7 @@
 <body>
     <div id="auth">
 
-        <div class="row h-100">
+        <div class="row h-100 justify-content-center">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="text-center pb-5">
@@ -59,11 +59,6 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Masuk</button>
                     </form>
-                </div>
-            </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-
                 </div>
             </div>
         </div>
