@@ -17,10 +17,22 @@ use Modules\Cuti\Http\Controllers\PengajuanCutiController;
 use Modules\Cuti\Http\Controllers\PersetujuanCutiController;
 
 Route::prefix('cuti')->name('cuti.')->group(function () {
-    Route::resources([
-        'pengajuan-cuti' => PengajuanCutiController::class,
-        'persetujuan-cuti' => PersetujuanCutiController::class,
-        'daftar-cuti' => CutiController::class,
-        'jenis-cuti' => JenisCutiController::class,
-    ]);
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resources([
+            'daftar-cuti' => CutiController::class,
+            'jenis-cuti' => JenisCutiController::class,
+        ]);
+    });
+
+    Route::group(['middleware' => ['kepala_sekolah', 'guru']], function () {
+        Route::resources([
+            'pengajuan-cuti' => PengajuanCutiController::class
+        ]);
+    });
+
+    Route::group(['middleware' => 'kepala_sekolah'], function () {
+        Route::resources([
+            'persetujuan-cuti' => PersetujuanCutiController::class
+        ]);
+    });
 });

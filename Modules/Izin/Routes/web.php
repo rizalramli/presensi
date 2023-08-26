@@ -17,10 +17,22 @@ use Modules\Izin\Http\Controllers\PengajuanIzinController;
 use Modules\Izin\Http\Controllers\PersetujuanIzinController;
 
 Route::prefix('izin')->name('izin.')->group(function () {
-    Route::resources([
-        'pengajuan-izin' => PengajuanIzinController::class,
-        'persetujuan-izin' => PersetujuanIzinController::class,
-        'daftar-izin' => IzinController::class,
-        'jenis-izin' => JenisIzinController::class,
-    ]);
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resources([
+            'daftar-izin' => IzinController::class,
+            'jenis-izin' => JenisIzinController::class,
+        ]);
+    });
+
+    Route::group(['middleware' => ['kepala_sekolah', 'guru']], function () {
+        Route::resources([
+            'pengajuan-izin' => PengajuanIzinController::class,
+        ]);
+    });
+
+    Route::group(['middleware' => 'kepala_sekolah'], function () {
+        Route::resources([
+            'persetujuan-izin' => PersetujuanIzinController::class,
+        ]);
+    });
 });

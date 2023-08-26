@@ -30,7 +30,7 @@ body.theme-dark {
     --bs-danger: #dc3545;
     --bs-light: #f8f9fa;
     --bs-dark: #f2f7ff;
-    --bs-primary-rgb: 67, 94, 190;
+    --bs-primary-rgb: 70, 139, 151;
     --bs-secondary-rgb: 108, 117, 125;
     --bs-success-rgb: 25, 135, 84;
     --bs-info-rgb: 13, 202, 240;
@@ -2815,7 +2815,7 @@ body.theme-dark .btn-primary {
     --bs-btn-bg: #468b97;
     --bs-btn-border-color: #468b97;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0B666A;
+    --bs-btn-hover-bg: #0b666a;
     --bs-btn-hover-border-color: #0b666a;
     --bs-btn-focus-shadow-rgb: 95, 118, 200;
     --bs-btn-active-color: #fff;

@@ -55,13 +55,15 @@ class HomeController extends Controller
         }
 
         $instansi = Instansi::getData();
+        $user = Auth::user();
+        $role = $user->getRoleNames()->first();
         $absensi = (object)[
             'jam_masuk' => $jam_masuk,
             'jam_pulang' => $jam_pulang,
             'total_jam_kerja' => $total_jam_kerja
         ];
 
-        return view('home', compact('instansi', 'absensi'));
+        return view('home', compact('instansi', 'absensi', 'role'));
     }
 
     public function index2()

@@ -17,10 +17,18 @@ use Modules\Absensi\Http\Controllers\MasukAbsensiController;
 use Modules\Absensi\Http\Controllers\PulangAbsensiController;
 
 Route::prefix('absensi')->name('absensi.')->group(function () {
-    Route::resources([
-        'daftar-absensi' => AbsensiController::class,
-        'masuk-absensi' => MasukAbsensiController::class,
-        'pulang-absensi' => PulangAbsensiController::class,
-        'laporan-absensi' => LaporanAbsensiController::class,
-    ]);
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resources([
+            'daftar-absensi' => AbsensiController::class,
+        ]);
+    });
+
+    Route::group(['middleware' => 'guru'], function () {
+        Route::resources([
+            'masuk-absensi' => MasukAbsensiController::class,
+            'pulang-absensi' => PulangAbsensiController::class,
+            'laporan-absensi' => LaporanAbsensiController::class,
+        ]);
+    });
 });

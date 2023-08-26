@@ -18,12 +18,19 @@ use Modules\Pengaturan\Http\Controllers\LokasiController;
 use Modules\Pengaturan\Http\Controllers\HariLiburController;
 
 Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
-    Route::resources([
-        'daftar-user' => DaftarUserController::class,
-        'hari-libur' => HariLiburController::class,
-        'instansi' => InstansiController::class,
-        'lokasi' => LokasiController::class,
-        'jam-kerja' => JamKerjaController::class,
-        'ubah-password' => UbahPasswordController::class,
-    ]);
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resources([
+            'daftar-user' => DaftarUserController::class,
+            'hari-libur' => HariLiburController::class,
+            'instansi' => InstansiController::class,
+            'lokasi' => LokasiController::class,
+            'jam-kerja' => JamKerjaController::class,
+        ]);
+    });
+
+    Route::group(['middleware' => 'guru'], function () {
+        Route::resources([
+            'ubah-password' => UbahPasswordController::class,
+        ]);
+    });
 });
