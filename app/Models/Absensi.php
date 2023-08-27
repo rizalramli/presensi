@@ -99,7 +99,8 @@ class Absensi extends Model
         $sql = "
         SELECT 
             a.jam_masuk,
-            a.jam_pulang
+            a.jam_pulang,
+            a.tanggal
         FROM absensi a
         WHERE 
             a.deleted_at IS NULL

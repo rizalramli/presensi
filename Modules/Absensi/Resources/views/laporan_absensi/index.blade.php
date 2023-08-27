@@ -191,7 +191,7 @@
                 }
 
                 if (isLiburNormal) {
-                    data += `<td colspan="4" class="bg-secondary text-white text-center"></td>`
+                    data += `<td colspan="4" class="text-center">Hari Libur</td>`
                 }
 
                 if (libur_nasional) {
