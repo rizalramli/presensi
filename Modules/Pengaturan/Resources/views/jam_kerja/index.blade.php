@@ -1,15 +1,8 @@
 @extends('layouts.app')
 
-@push('custom-css-start')
-    <link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
-@endpush
-
 @push('custom-css-end')
     <link rel="stylesheet" href="{{ asset('assets/css/pages/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/pages/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/extensions/flatpickr/flatpickr.min.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 
@@ -51,13 +44,11 @@
                                         <td>
                                             <input type="hidden" class="form-control" value="{{ $item->id }}"
                                                 name="id[]" readonly>
-                                            <input type="text" name="jam_masuk[]"
-                                                class="form-control flatpickr-time-picker-24h"
+                                            <input type="text" name="jam_masuk[]" class="form-control"
                                                 value="{{ $item->jam_masuk != null ? date('H:i', strtotime($item->jam_masuk)) : '' }}">
                                         </td>
                                         <td>
-                                            <input type="text" name="jam_pulang[]"
-                                                class="form-control flatpickr-time-picker-24h"
+                                            <input type="text" name="jam_pulang[]" class="form-control"
                                                 value="{{ $item->jam_pulang != null ? date('H:i', strtotime($item->jam_pulang)) : '' }}">
                                         </td>
                                     </tr>
@@ -77,13 +68,7 @@
 
 @push('custom-script')
     <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
-    <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
-    <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
-    <script src="{{ asset('assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
     <script src="{{ asset('assets/extensions/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('assets/extensions/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ asset('assets/static/js/page/date-picker.js') }}"></script>
     <script>
         $(document).ready(function() {
             ajaxSetup()

@@ -37,7 +37,8 @@
                     <h1 class="error-title">NOT FOUND</h1>
                     <p class='fs-5 text-gray-600'>Halaman yang anda cari tidak ditemukan.</p>
                     @if ($role_user == 'Admin')
-                        <a href="{{ route('home2') }}" class="btn btn-lg btn-outline-primary mt-3">Kembali</a>
+                        <a href="{{ route('absensi.daftar-absensi.index') }}"
+                            class="btn btn-lg btn-outline-primary mt-3">Kembali</a>
                     @else
                         <a href="{{ route('home') }}" class="btn btn-lg btn-outline-primary mt-3">Kembali</a>
                     @endif
