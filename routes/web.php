@@ -27,7 +27,9 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'admin'], function () {
-        Route::get('/home2', [App\Http\Controllers\HomeController::class, 'index2'])->name('home2');
+        Route::get('home2', function () {
+            return redirect()->route('absensi.daftar-absensi.index');
+        });
     });
 
     Route::group(['middleware' => 'guru'], function () {

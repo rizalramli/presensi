@@ -60,12 +60,6 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Absensi</li>
-                <li class="sidebar-item {{ Request::is('home2') ? 'active' : '' }}">
-                    <a href="{{ route('home2') }}" class='sidebar-link'>
-                        <i class="bi bi-house"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
                 <li class="sidebar-item {{ Request::is('absensi/daftar-absensi') ? 'active' : '' }}">
                     <a href="{{ route('absensi.daftar-absensi.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-bounding-box"></i>
