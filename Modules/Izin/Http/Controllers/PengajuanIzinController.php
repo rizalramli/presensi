@@ -5,6 +5,7 @@ namespace Modules\Izin\Http\Controllers;
 use App\Models\PengajuanIzin;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class PengajuanIzinController extends Controller
 {
@@ -24,11 +25,12 @@ class PengajuanIzinController extends Controller
 
     public function store()
     {
-        if (request()->file('bukti_foto')) {
+        if (request()->hasFile('bukti_foto')) {
             $file = request()->file('bukti_foto');
             $file_name = 'izin-' . time() . '.' . $file->extension();
 
-            request()->file('bukti_foto')->move('assets/images/izin', $file_name);
+            $image = Image::make($file);
+            $image->save('assets/images/izin/' . $file_name, 50);
 
             request()->bukti_foto = $file_name;
         }

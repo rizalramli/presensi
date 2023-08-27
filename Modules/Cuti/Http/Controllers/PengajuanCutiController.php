@@ -5,6 +5,7 @@ namespace Modules\Cuti\Http\Controllers;
 use App\Models\PengajuanCuti;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class PengajuanCutiController extends Controller
 {
@@ -24,11 +25,13 @@ class PengajuanCutiController extends Controller
 
     public function store()
     {
-        if (request()->file('bukti_foto')) {
+
+        if (request()->hasFile('bukti_foto')) {
             $file = request()->file('bukti_foto');
             $file_name = 'cuti-' . time() . '.' . $file->extension();
 
-            request()->file('bukti_foto')->move('assets/images/cuti', $file_name);
+            $image = Image::make($file);
+            $image->save('assets/images/cuti/' . $file_name, 50);
 
             request()->bukti_foto = $file_name;
         }
