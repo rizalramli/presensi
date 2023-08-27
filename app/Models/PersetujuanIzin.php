@@ -30,9 +30,11 @@ class PersetujuanIzin extends Model
 
     public static function getDataGuru()
     {
-        $sql = "SELECT id,name as nama FROM users";
+        $sql = "SELECT u.id,u.name as nama FROM users u
+        JOIN model_has_roles mhr ON mhr.model_id = u.id
+        JOIN roles r ON r.id = mhr.role_id WHERE r.name != 'Admin' AND is_aktif = 1";
 
-        $sql = $sql . " ORDER BY name ASC";
+        $sql = $sql . " ORDER BY u.name ASC";
 
         $result = DB::select($sql);
 
