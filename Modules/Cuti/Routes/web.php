@@ -24,7 +24,7 @@ Route::prefix('cuti')->name('cuti.')->group(function () {
         ]);
     });
 
-    Route::group(['middleware' => ['kepala_sekolah', 'guru']], function () {
+    Route::group(['middleware' => ['guru']], function () {
         Route::resources([
             'pengajuan-cuti' => PengajuanCutiController::class
         ]);

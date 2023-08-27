@@ -16,7 +16,7 @@ class GuruMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->hasRole('Guru')) {
+        if (Auth::user() && (Auth::user()->hasRole('Guru') || Auth::user()->hasRole('Kepala Sekolah'))) {
             return $next($request);
         }
 

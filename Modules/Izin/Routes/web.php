@@ -24,7 +24,7 @@ Route::prefix('izin')->name('izin.')->group(function () {
         ]);
     });
 
-    Route::group(['middleware' => ['kepala_sekolah', 'guru']], function () {
+    Route::group(['middleware' => ['guru']], function () {
         Route::resources([
             'pengajuan-izin' => PengajuanIzinController::class,
         ]);
