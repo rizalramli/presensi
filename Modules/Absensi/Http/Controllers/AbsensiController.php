@@ -102,7 +102,7 @@ class AbsensiController extends Controller
                         case "2":
                             return '<b><span class="text-warning">&#10004;</span></b>';
                             break;
-                        case "2":
+                        case "3":
                             return '<b><span class="text-danger">&#10004;</span></b>';
                             break;
                         default:
@@ -139,17 +139,27 @@ class AbsensiController extends Controller
                     return $status_lokasi_masuk;
                 })
                 ->addColumn('status_lokasi_pulang_export', function ($row) {
-                    if ($row->status_lokasi_pulang != null) {
-                        $status_lokasi_pulang = $row->status_lokasi_pulang == 1 ? 'didalam radius' : 'diluar radius';
-                    } else {
-                        $status_lokasi_pulang = '-';
+                    switch ($row->status_lokasi_pulang) {
+                        case "0":
+                            return "diluar radius";
+                            break;
+                        case "1":
+                            return "didalam radius";
+                            break;
+                        default:
+                            return '-';
                     }
-                    return $status_lokasi_pulang;
                 })
                 ->rawColumns(['jam_masuk', 'jam_pulang', 'status_absensi', 'aksi'])
                 ->toJson();
         }
 
         return view('absensi::absensi.index', compact('daftar_bulan', 'daftar_guru'));
+    }
+
+    public function destroy($id)
+    {
+        $data = Absensi::deleteData($id);
+        return Response()->json($data);
     }
 }

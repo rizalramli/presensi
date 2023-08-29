@@ -87,7 +87,7 @@ class Absensi extends Model
 
     public static function deleteData($id)
     {
-        $sql = DB::table('izin')
+        $sql = DB::table('absensi')
             ->where('id', $id)
             ->update([
                 'deleted_at' => now()

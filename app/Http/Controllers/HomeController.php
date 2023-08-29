@@ -49,7 +49,6 @@ class HomeController extends Controller
 
                 $total_jam_kerja =  $jam . " jam " . $menit . " menit ";
             } else {
-                $jam_pulang = '-';
                 $jam_pulang = date('H:i');
                 $timestamp_masuk = strtotime($absensi_hari_ini->jam_masuk);
                 $timestamp_keluar = strtotime($absensi_hari_ini->jam_pulang != null ? $absensi_hari_ini->jam_pulang : date('H:i:s'));
@@ -62,6 +61,7 @@ class HomeController extends Controller
                 $sisa_detik = $selisih_detik % 3600;
                 $menit = floor($sisa_detik / 60);
 
+                $jam_pulang = '-';
                 $total_jam_kerja =  $jam . " jam " . $menit . " menit ";
 
                 if ($absensi_hari_ini->tanggal != date('Y-m-d')) {

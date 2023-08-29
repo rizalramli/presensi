@@ -392,5 +392,38 @@
             myMarker.addTo(map);
             circle.addTo(map);
         }
+
+        function deleteData(id) {
+            var url = "{{ route('absensi.daftar-absensi.destroy', ':id') }}";
+            url = url.replace(':id', id);
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: "Apakah anda yakin ingin menghapus?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, saya yakin!',
+                cancelButtonText: "Batal",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        success: function(res) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses',
+                                text: 'Data berhasil dihapus!',
+                                willClose: () => {
+                                    reinitTable()
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
     </script>
 @endpush
