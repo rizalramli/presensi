@@ -84,7 +84,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <video style="width: 100%" id="cameraVideo" autoplay></video>
+                                                <video style="width: 100%" id="cameraVideo" autoplay playsinline></video>
                                             </div>
                                             <div class="modal-footer">
                                                 <button id="captureSnapshot" class="btn btn-primary">Ambil Foto</button>
